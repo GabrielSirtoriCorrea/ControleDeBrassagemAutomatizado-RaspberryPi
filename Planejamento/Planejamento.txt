@@ -1,0 +1,61 @@
+Váriaveis:
+
+JSON:
+
+Modo de Brassagem = (Automático ou Manual)
+Brassagem  = (Em andamento, Não iniciada ou Parada)
+Bomba = Booleano
+
+tanque 1 (Mostura):
+	Temperatura = Inteiro
+	SetpointInicial = Inteiro
+	Motor = Booleano
+	Resistência = Booleano
+	AlertaMalte: Boolean
+	Rampas = Lista
+	Válvulas p/ Clarificação =  Boolean
+
+tanque 2 (Clarificação):
+	Motor = Booleano
+	Válvulas p/ Fervura =  Boolean
+
+tanque 3 (Fervura):
+	Temperatura = Inteiro
+	Setpoint = Inteiro
+	Resistência = Booleano
+	Lúpulos = Lista 
+	AlertaLúpulo = Boolean
+	Válvulas p/ Fermentação = Boolean 
+
+Parâmetros Nova Brassagem:
+Temperatura inicial Panela 1
+Quantidade de rampas
+Temperatura rampa ..
+Tempo rampa ..
+Tempo de clarificação
+Tempo de Fervura
+Quantidade de lúpulos
+Tempo Lúpulo ..
+
+Python:
+
+Pega as informações no JSON, e as executa
+
+2 Threads:
+
+Thread 1:  Pega todas as variáveis atuais dos processos e as escreve no JSON
+	
+Thread 2: Executa a lógica do projeto
+
+Java:
+IHM do projeto, pega as informações descritas pelo usuário e as escreve no JSON para configuração
+Pega as váriaveis atuais dos processos e as escreve na interface
+
+Botões:
+Tanques 1, 2, 3: Mostra as váriaveis do processo daquele tanque (Temperatura, Estado da resistência, etc)
+Nova Brassagem: Chama a tela Nova Brassagem para a configuração de uma nova brassagem
+Alterar Modo: Altera o modo de execução da brassagem, automático ou manual
+
+
+
+ 
