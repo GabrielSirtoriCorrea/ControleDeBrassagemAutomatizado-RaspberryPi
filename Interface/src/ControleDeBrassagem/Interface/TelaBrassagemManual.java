@@ -15,6 +15,8 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
      * Creates new form TelaBrassagemManual
      */
     public TelaBrassagemManual() {
+        this.setExtendedState(Interface.MAXIMIZED_BOTH); 
+        this.setUndecorated(true);
         initComponents();
     }
 
@@ -52,6 +54,7 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
