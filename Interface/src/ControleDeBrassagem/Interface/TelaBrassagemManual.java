@@ -164,6 +164,11 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
 
         btnChangeMode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 16.png"))); // NOI18N
         btnChangeMode.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnChangeMode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChangeModeActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnChangeMode, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 150, 80));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Wallpaper.jpg"))); // NOI18N
@@ -195,6 +200,12 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
     private void btnEmergencyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmergencyActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEmergencyActionPerformed
+
+    private void btnChangeModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeModeActionPerformed
+        // TODO add your handling code here:
+        new Interface().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnChangeModeActionPerformed
 
     /**
      * @param args the command line arguments
