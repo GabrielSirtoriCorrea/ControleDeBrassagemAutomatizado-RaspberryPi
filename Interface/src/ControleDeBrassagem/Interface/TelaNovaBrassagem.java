@@ -53,50 +53,50 @@ public class TelaNovaBrassagem extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Comic Sans MS", 1, 40)); // NOI18N
         jLabel2.setText("NOVA BRASSAGEM");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 0, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, -1, -1));
 
         lblTarget.setFont(new java.awt.Font("Comic Sans MS", 1, 30)); // NOI18N
         lblTarget.setText("39ºC");
-        getContentPane().add(lblTarget, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 160, 90, 70));
+        getContentPane().add(lblTarget, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 160, 100, 70));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 34.png"))); // NOI18N
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 150, 110, 90));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 150, 110, 90));
 
         jLabel5.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
         jLabel5.setText("PRÓXIMO");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 560, 180, 50));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 520, 180, 50));
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Polygon 2.png"))); // NOI18N
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 540, 80, 90));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 510, 80, 90));
 
         btnLeftArrow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLeftArrowActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLeftArrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 570, 40, 30));
+        getContentPane().add(btnLeftArrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 540, 40, 30));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Polygon 1.png"))); // NOI18N
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 470, 100, 60));
-        getContentPane().add(btnTopArrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 490, 40, 30));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 440, 100, 60));
+        getContentPane().add(btnTopArrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 460, 40, 30));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Polygon 5.png"))); // NOI18N
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 640, 80, 50));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 610, 80, 50));
 
         btnBottomArrow.setBackground(new java.awt.Color(51, 153, 255));
-        getContentPane().add(btnBottomArrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 640, 40, 30));
+        getContentPane().add(btnBottomArrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 610, 40, 30));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Polygon 4.png"))); // NOI18N
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 530, 50, 110));
-        getContentPane().add(btnRightArrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 570, 40, 30));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 500, 50, 110));
+        getContentPane().add(btnRightArrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 540, 40, 30));
 
         jLabel8.setFont(new java.awt.Font("Comic Sans MS", 1, 36)); // NOI18N
         jLabel8.setText("Temperatura inicial panela 1:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, 530, 50));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, 600, 50));
 
-        jLabel11.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Comic Sans MS", 1, 21)); // NOI18N
         jLabel11.setText("CANCELAR");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 630, 180, 50));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 590, 180, 50));
 
         btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 11.png"))); // NOI18N
         btnCancel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -105,11 +105,11 @@ public class TelaNovaBrassagem extends javax.swing.JFrame {
                 btnCancelActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 630, 140, 50));
+        getContentPane().add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 590, 140, 50));
 
         btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 11.png"))); // NOI18N
         btnNext.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        getContentPane().add(btnNext, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 560, 140, 50));
+        getContentPane().add(btnNext, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 520, 140, 50));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Wallpaper.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));

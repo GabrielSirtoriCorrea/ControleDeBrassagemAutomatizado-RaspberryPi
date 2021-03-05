@@ -59,10 +59,10 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
         jLabel3.setText("EMERGÊNCIA");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 590, 180, 50));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 540, 170, 30));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Ellipse 1.png"))); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 520, 200, 190));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 200, 190));
 
         btnEmergency.setText("EMERGENCIA");
         btnEmergency.addActionListener(new java.awt.event.ActionListener() {
@@ -70,11 +70,11 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
                 btnEmergencyActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEmergency, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 570, 160, 90));
+        getContentPane().add(btnEmergency, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 510, 160, 90));
 
         jLabel18.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
         jLabel18.setText("MODO DE BRASSAGEM: MANUAL");
-        getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 380, 50));
+        getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 460, 50));
 
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 9.png"))); // NOI18N
         getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 630, 70));
