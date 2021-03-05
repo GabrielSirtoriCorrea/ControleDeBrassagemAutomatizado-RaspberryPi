@@ -56,10 +56,10 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
         jLabel3.setText("EMERGÊNCIA");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 180, 50));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 590, 180, 50));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Ellipse 1.png"))); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 200, 190));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 520, 200, 190));
 
         btnEmergency.setText("EMERGENCIA");
         btnEmergency.addActionListener(new java.awt.event.ActionListener() {
@@ -67,7 +67,7 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
                 btnEmergencyActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEmergency, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 160, 90));
+        getContentPane().add(btnEmergency, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 570, 160, 90));
 
         jLabel18.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
         jLabel18.setText("MODO DE BRASSAGEM: MANUAL");
@@ -78,7 +78,7 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Comic Sans MS", 1, 28)); // NOI18N
         jLabel5.setText("<html><center>MOTOR  TANQUE 2<center></html>");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 280, 170, 100));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 390, 170, 100));
 
         btnMotorTank2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 18.png"))); // NOI18N
         btnMotorTank2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -88,11 +88,11 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
                 btnMotorTank2ActionPerformed(evt);
             }
         });
-        getContentPane().add(btnMotorTank2, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 280, 170, 100));
+        getContentPane().add(btnMotorTank2, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 390, 170, 100));
 
         jLabel4.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
         jLabel4.setText("<html><center>MOTOR \nTANQUE 1<center></html>");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 60, 170, 100));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 130, 170, 100));
 
         btnMotorTank1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 18.png"))); // NOI18N
         btnMotorTank1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -102,11 +102,11 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
                 btnMotorTank1ActionPerformed(evt);
             }
         });
-        getContentPane().add(btnMotorTank1, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 60, 170, 100));
+        getContentPane().add(btnMotorTank1, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 130, 170, 100));
 
         jLabel6.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
         jLabel6.setText("<html><center>RESISTÊNCIA TANQUE 1<center></html>");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 60, 180, 100));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 130, 180, 100));
 
         btnResistanceTank1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 18.png"))); // NOI18N
         btnResistanceTank1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -115,11 +115,11 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
                 btnResistanceTank1ActionPerformed(evt);
             }
         });
-        getContentPane().add(btnResistanceTank1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 60, 170, 100));
+        getContentPane().add(btnResistanceTank1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 130, 170, 100));
 
         jLabel7.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
         jLabel7.setText("<html><center>RESISTÊNCIA TANQUE 3<center></html>");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 280, 180, 100));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 390, 180, 100));
 
         btnResistanceTank3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 18.png"))); // NOI18N
         btnResistanceTank3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -128,11 +128,11 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
                 btnResistanceTank3ActionPerformed(evt);
             }
         });
-        getContentPane().add(btnResistanceTank3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 280, 170, 100));
+        getContentPane().add(btnResistanceTank3, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 390, 170, 100));
 
         jLabel8.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
         jLabel8.setText("<html><center>BOMBA<center></html>");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 170, 140, 100));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 260, 140, 100));
 
         btnBomb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 18.png"))); // NOI18N
         btnBomb.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -141,22 +141,22 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
                 btnBombActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBomb, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 170, 170, 100));
+        getContentPane().add(btnBomb, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, 170, 100));
 
         ledBomb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/BtnOFF.png"))); // NOI18N
-        getContentPane().add(ledBomb, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 290, -1, 80));
+        getContentPane().add(ledBomb, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 400, -1, 80));
 
         ledResistenceTank1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/BtnOFF.png"))); // NOI18N
-        getContentPane().add(ledResistenceTank1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 170, -1, 80));
+        getContentPane().add(ledResistenceTank1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 240, -1, 80));
 
         ledMotorTank2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/BtnOFF.png"))); // NOI18N
-        getContentPane().add(ledMotorTank2, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 390, -1, 80));
+        getContentPane().add(ledMotorTank2, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 510, -1, 80));
 
         ledMotorTank1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/BtnOFF.png"))); // NOI18N
-        getContentPane().add(ledMotorTank1, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 170, -1, 80));
+        getContentPane().add(ledMotorTank1, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 240, -1, 80));
 
         ledResistenceTank3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/BtnOFF.png"))); // NOI18N
-        getContentPane().add(ledResistenceTank3, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 390, -1, 80));
+        getContentPane().add(ledResistenceTank3, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 510, -1, 80));
 
         jLabel14.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
         jLabel14.setText("<html><center>ALTERAR MODO<center></html>");
@@ -172,7 +172,7 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
         getContentPane().add(btnChangeMode, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 150, 80));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Wallpaper.jpg"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 600));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
