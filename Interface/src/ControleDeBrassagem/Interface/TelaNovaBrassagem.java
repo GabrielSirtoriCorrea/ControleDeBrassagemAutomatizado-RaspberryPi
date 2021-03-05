@@ -61,31 +61,31 @@ public class TelaNovaBrassagem extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
         jLabel5.setText("PRÓXIMO");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 440, 180, 50));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 560, 180, 50));
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Polygon 2.png"))); // NOI18N
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 400, 80, 90));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 540, 80, 90));
 
         btnLeftArrow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLeftArrowActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLeftArrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 430, 40, 30));
+        getContentPane().add(btnLeftArrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 570, 40, 30));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Polygon 1.png"))); // NOI18N
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 330, 100, 60));
-        getContentPane().add(btnTopArrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 350, 40, 30));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 470, 100, 60));
+        getContentPane().add(btnTopArrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 490, 40, 30));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Polygon 5.png"))); // NOI18N
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 500, 80, 50));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 640, 80, 50));
 
         btnBottomArrow.setBackground(new java.awt.Color(51, 153, 255));
-        getContentPane().add(btnBottomArrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 500, 40, 30));
+        getContentPane().add(btnBottomArrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 640, 40, 30));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Polygon 4.png"))); // NOI18N
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 390, 50, 110));
-        getContentPane().add(btnRightArrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 430, 40, 30));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 530, 50, 110));
+        getContentPane().add(btnRightArrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 570, 40, 30));
 
         jLabel8.setFont(new java.awt.Font("Comic Sans MS", 1, 36)); // NOI18N
         jLabel8.setText("Temperatura inicial panela 1:");
@@ -93,7 +93,7 @@ public class TelaNovaBrassagem extends javax.swing.JFrame {
 
         jLabel11.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
         jLabel11.setText("CANCELAR");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 510, 180, 50));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 630, 180, 50));
 
         btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 11.png"))); // NOI18N
         btnCancel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -102,14 +102,14 @@ public class TelaNovaBrassagem extends javax.swing.JFrame {
                 btnCancelActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 510, 140, 50));
+        getContentPane().add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 630, 140, 50));
 
         btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 11.png"))); // NOI18N
         btnNext.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        getContentPane().add(btnNext, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 440, 140, 50));
+        getContentPane().add(btnNext, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 560, 140, 50));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Wallpaper.jpg"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 600));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

@@ -72,32 +72,32 @@ public class Interface extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
         jLabel9.setText("TANQUE 2");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 380, -1, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 480, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
         jLabel7.setText("TANQUE 3");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 370, 130, 50));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 480, 130, 50));
 
         jLabel3.setFont(new java.awt.Font("Comic Sans MS", 1, 26)); // NOI18N
         jLabel3.setText("EMERGÊNCIA");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 190, 60));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 590, 190, 60));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Ellipse 1.png"))); // NOI18N
         jLabel2.setToolTipText("");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 200, 190));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 520, 200, 190));
 
         jLabel8.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
         jLabel8.setText("TANQUE 1");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 380, 130, 40));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 480, 130, 40));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Group 1.png"))); // NOI18N
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 310, 140, 170));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 410, 140, 170));
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Group 1.png"))); // NOI18N
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 310, -1, -1));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 410, -1, -1));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Group 5.png"))); // NOI18N
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 290, 250, 230));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 390, 250, 230));
 
         btnTank2.setBackground(new java.awt.Color(51, 102, 255));
         btnTank2.setText("BOTAO TANQUE 2");
@@ -106,13 +106,13 @@ public class Interface extends javax.swing.JFrame {
                 btnTank2ActionPerformed(evt);
             }
         });
-        getContentPane().add(btnTank2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 320, 100, 140));
+        getContentPane().add(btnTank2, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 420, 100, 140));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Group 1.png"))); // NOI18N
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 310, -1, -1));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 410, -1, -1));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Group 4.png"))); // NOI18N
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 420, 990, 140));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 520, 990, 140));
 
         btnTank1.setBackground(new java.awt.Color(51, 102, 255));
         btnTank1.setText("BOTAO TANQUE 1");
@@ -121,7 +121,7 @@ public class Interface extends javax.swing.JFrame {
                 btnTank1ActionPerformed(evt);
             }
         });
-        getContentPane().add(btnTank1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 320, 120, 130));
+        getContentPane().add(btnTank1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 420, 120, 130));
 
         btnTank3.setBackground(new java.awt.Color(51, 102, 255));
         btnTank3.setText("BOTAO TANQUE 2");
@@ -130,22 +130,22 @@ public class Interface extends javax.swing.JFrame {
                 btnTank3ActionPerformed(evt);
             }
         });
-        getContentPane().add(btnTank3, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 320, 110, 130));
+        getContentPane().add(btnTank3, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 420, 110, 130));
 
         jLabel13.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
         jLabel13.setText("BOMBA:");
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 20, 140, 40));
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 30, 140, 40));
 
         lblBomb.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
         lblBomb.setText("DESLIGADA");
-        getContentPane().add(lblBomb, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 20, 170, 40));
+        getContentPane().add(lblBomb, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 30, 170, 40));
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 10.png"))); // NOI18N
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 10, 260, 60));
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 20, 260, 60));
 
         jLabel20.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
         jLabel20.setText("<html><center> ALTERAR MODO <center></html>");
-        getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 150, 80));
+        getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 150, 80));
 
         btnChangeMode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 16.png"))); // NOI18N
         btnChangeMode.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -154,7 +154,7 @@ public class Interface extends javax.swing.JFrame {
                 btnChangeModeActionPerformed(evt);
             }
         });
-        getContentPane().add(btnChangeMode, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 150, 80));
+        getContentPane().add(btnChangeMode, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 150, 80));
 
         btnEmergency.setText("Emergencia");
         btnEmergency.addActionListener(new java.awt.event.ActionListener() {
@@ -162,11 +162,11 @@ public class Interface extends javax.swing.JFrame {
                 btnEmergencyActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEmergency, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, 150, 90));
+        getContentPane().add(btnEmergency, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 570, 150, 90));
 
         lblParameter2.setFont(new java.awt.Font("Comic Sans MS", 1, 21)); // NOI18N
         lblParameter2.setText("SetPoint:");
-        getContentPane().add(lblParameter2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, 100, 50));
+        getContentPane().add(lblParameter2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 220, 100, 50));
 
         jLabel21.setFont(new java.awt.Font("Comic Sans MS", 1, 21)); // NOI18N
         jLabel21.setText("MODO DE BRASSAGEM: AUTOMÁTICO");
@@ -177,50 +177,50 @@ public class Interface extends javax.swing.JFrame {
 
         lblParameter5.setFont(new java.awt.Font("Comic Sans MS", 1, 21)); // NOI18N
         lblParameter5.setText("Rampa Atual: ");
-        getContentPane().add(lblParameter5, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 160, 150, 50));
+        getContentPane().add(lblParameter5, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 220, 150, 50));
 
         lblParameter4.setFont(new java.awt.Font("Comic Sans MS", 1, 21)); // NOI18N
         lblParameter4.setText("Motor:");
-        getContentPane().add(lblParameter4, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 120, 70, 50));
+        getContentPane().add(lblParameter4, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 180, 70, 50));
 
         lblResult1.setFont(new java.awt.Font("Comic Sans MS", 1, 21)); // NOI18N
         lblResult1.setText("39 ºC");
-        getContentPane().add(lblResult1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 120, 70, 50));
+        getContentPane().add(lblResult1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 180, 70, 50));
 
         lblParameter3.setFont(new java.awt.Font("Comic Sans MS", 1, 21)); // NOI18N
         lblParameter3.setText("Resistência: ");
-        getContentPane().add(lblParameter3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, 140, 30));
+        getContentPane().add(lblParameter3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 270, 140, 30));
 
         lblTankNumber.setFont(new java.awt.Font("Comic Sans MS", 1, 21)); // NOI18N
         lblTankNumber.setText("Tanque 1:");
-        getContentPane().add(lblTankNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 80, 120, 50));
+        getContentPane().add(lblTankNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 140, 120, 50));
 
         lblResult2.setFont(new java.awt.Font("Comic Sans MS", 1, 21)); // NOI18N
         lblResult2.setText("41 ºC");
-        getContentPane().add(lblResult2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 170, 70, 30));
+        getContentPane().add(lblResult2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 230, 70, 30));
 
         lblResult3.setFont(new java.awt.Font("Comic Sans MS", 1, 21)); // NOI18N
         lblResult3.setText("Desligada");
-        getContentPane().add(lblResult3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 210, 100, 30));
+        getContentPane().add(lblResult3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 270, 100, 30));
 
         lblResult4.setFont(new java.awt.Font("Comic Sans MS", 1, 21)); // NOI18N
         lblResult4.setText("Desligada");
-        getContentPane().add(lblResult4, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 130, 100, 30));
+        getContentPane().add(lblResult4, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 190, 100, 30));
 
         lblResult5.setFont(new java.awt.Font("Comic Sans MS", 1, 21)); // NOI18N
         lblResult5.setText("2");
-        getContentPane().add(lblResult5, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 170, 30, 30));
+        getContentPane().add(lblResult5, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 230, 30, 30));
 
         lblParameter10.setFont(new java.awt.Font("Comic Sans MS", 1, 21)); // NOI18N
         lblParameter10.setText("Temperatura: ");
-        getContentPane().add(lblParameter10, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 120, 150, 50));
+        getContentPane().add(lblParameter10, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 180, 150, 50));
 
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 8.png"))); // NOI18N
-        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 70, 570, 200));
+        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 130, 570, 200));
 
         jLabel22.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
         jLabel22.setText("<html><center>NOVA BRASSAGEM<center></html>");
-        getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 150, 80));
+        getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 150, 80));
 
         btnNewBrew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 16.png"))); // NOI18N
         btnNewBrew.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -229,10 +229,10 @@ public class Interface extends javax.swing.JFrame {
                 btnNewBrewActionPerformed(evt);
             }
         });
-        getContentPane().add(btnNewBrew, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 150, 80));
+        getContentPane().add(btnNewBrew, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 150, 80));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Wallpaper.jpg"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 600));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
