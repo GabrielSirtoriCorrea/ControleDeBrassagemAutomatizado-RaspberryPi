@@ -97,6 +97,11 @@ public class TelaNovaBrassagem extends javax.swing.JFrame {
 
         btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 11.png"))); // NOI18N
         btnCancel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 510, 140, 50));
 
         btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 11.png"))); // NOI18N
@@ -112,6 +117,12 @@ public class TelaNovaBrassagem extends javax.swing.JFrame {
     private void btnLeftArrowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeftArrowActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnLeftArrowActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        // TODO add your handling code here:
+        new Interface().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnCancelActionPerformed
 
     /**
      * @param args the command line arguments

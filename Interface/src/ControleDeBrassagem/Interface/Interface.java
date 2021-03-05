@@ -44,10 +44,8 @@ public class Interface extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         lblBomb = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         btnChangeMode = new javax.swing.JButton();
-        btnNewBrew = new javax.swing.JButton();
         btnEmergency = new javax.swing.JButton();
         lblParameter2 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
@@ -63,6 +61,8 @@ public class Interface extends javax.swing.JFrame {
         lblResult5 = new javax.swing.JLabel();
         lblParameter10 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        btnNewBrew = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         jLabel15.setText("jLabel15");
@@ -143,24 +143,18 @@ public class Interface extends javax.swing.JFrame {
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 10.png"))); // NOI18N
         getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 10, 260, 60));
 
-        jLabel14.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel14.setText("<html> <center> NOVA  BRASSAGEM <center></html>");
-        jLabel14.setToolTipText("");
-        jLabel14.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 150, 80));
-
         jLabel20.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
         jLabel20.setText("<html><center> ALTERAR MODO <center></html>");
         getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 150, 80));
 
         btnChangeMode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 16.png"))); // NOI18N
         btnChangeMode.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnChangeMode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChangeModeActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnChangeMode, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 150, 80));
-
-        btnNewBrew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 16.png"))); // NOI18N
-        btnNewBrew.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        getContentPane().add(btnNewBrew, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 150, 80));
 
         btnEmergency.setText("Emergencia");
         btnEmergency.addActionListener(new java.awt.event.ActionListener() {
@@ -224,6 +218,19 @@ public class Interface extends javax.swing.JFrame {
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 8.png"))); // NOI18N
         getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 70, 570, 200));
 
+        jLabel22.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
+        jLabel22.setText("<html><center>NOVA BRASSAGEM<center></html>");
+        getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 150, 80));
+
+        btnNewBrew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 16.png"))); // NOI18N
+        btnNewBrew.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnNewBrew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewBrewActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnNewBrew, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 150, 80));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Wallpaper.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 600));
 
@@ -246,6 +253,17 @@ public class Interface extends javax.swing.JFrame {
     private void btnEmergencyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmergencyActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEmergencyActionPerformed
+
+    private void btnChangeModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeModeActionPerformed
+        new TelaBrassagemManual().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnChangeModeActionPerformed
+
+    private void btnNewBrewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewBrewActionPerformed
+        // TODO add your handling code here:
+        new TelaNovaBrassagem().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnNewBrewActionPerformed
 
     /**
      * @param args the command line arguments
@@ -294,13 +312,13 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
