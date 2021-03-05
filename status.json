@@ -1,0 +1,31 @@
+{
+    "Tank1":{
+        "Temperature": 0,
+        "InicialSetPoint":  0,
+        "Motor": false,
+        "Resistence": false,
+        "MaltAlert":  false,
+        "Ramps": [
+            [1, "00:00"],
+            [2, "00:00"]
+        ],
+        "NextProcess": false
+    },
+
+    "Tank2":{
+        "Motor": false,
+        "NextProcess": false
+    },
+
+    "Tank3":{
+        "Temperature": 0,
+        "SetPoint":  0,
+        "Resistence": false,
+        "HopAlert":  false,
+        "Hops": [
+            [1, "00:00"],
+            [2, "00:00"]
+        ],
+        "NextProcess": false
+    }
+}
