@@ -5,12 +5,17 @@
  */
 package ControleDeBrassagem.Interface;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Timer;
+
 /**
  *
  * @author Gazebo
  */
 public class Interface extends javax.swing.JFrame {
-
+    StatusController status;
+    int tankControled = 1;
     /**
      * Creates new form Interface
      */
@@ -19,7 +24,11 @@ public class Interface extends javax.swing.JFrame {
         this.setUndecorated(true);
         toFront();
         initComponents();
-      
+        status = new StatusController();
+        status.writeStatus(null, "BrewMode", "Automatic");
+        System.out.println(status.readStatus().get("BrewMode"));
+        Timer timer = new Timer(1000, new TankController());
+        timer.start();
     }
 
     /**
@@ -63,7 +72,7 @@ public class Interface extends javax.swing.JFrame {
         lblResult3 = new javax.swing.JLabel();
         lblResult4 = new javax.swing.JLabel();
         lblResult5 = new javax.swing.JLabel();
-        lblParameter10 = new javax.swing.JLabel();
+        lblParameter1 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         btnNewBrew = new javax.swing.JButton();
@@ -83,9 +92,9 @@ public class Interface extends javax.swing.JFrame {
         jLabel7.setText("TANQUE 3");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 480, 130, 50));
 
-        jLabel3.setFont(new java.awt.Font("Comic Sans MS", 1, 26)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
         jLabel3.setText("EMERGÊNCIA");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 550, 230, 50));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, 230, 50));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Ellipse 1.png"))); // NOI18N
         jLabel2.setToolTipText("");
@@ -137,18 +146,18 @@ public class Interface extends javax.swing.JFrame {
         });
         getContentPane().add(btnTank3, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 420, 110, 130));
 
-        jLabel13.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Comic Sans MS", 1, 20)); // NOI18N
         jLabel13.setText("BOMBA:");
         getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 30, 140, 40));
 
-        lblBomb.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
+        lblBomb.setFont(new java.awt.Font("Comic Sans MS", 1, 20)); // NOI18N
         lblBomb.setText("DESLIGADA");
         getContentPane().add(lblBomb, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 30, 170, 40));
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 10.png"))); // NOI18N
         getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 20, 260, 60));
 
-        jLabel20.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
+        jLabel20.setFont(new java.awt.Font("Comic Sans MS", 1, 20)); // NOI18N
         jLabel20.setText("<html><center> ALTERAR MODO <center></html>");
         getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 150, 80));
 
@@ -173,7 +182,7 @@ public class Interface extends javax.swing.JFrame {
         lblParameter2.setText("SetPoint:");
         getContentPane().add(lblParameter2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 220, 130, 50));
 
-        jLabel21.setFont(new java.awt.Font("Comic Sans MS", 1, 21)); // NOI18N
+        jLabel21.setFont(new java.awt.Font("Comic Sans MS", 1, 20)); // NOI18N
         jLabel21.setText("MODO DE BRASSAGEM: AUTOMÁTICO");
         getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 490, 50));
 
@@ -190,7 +199,7 @@ public class Interface extends javax.swing.JFrame {
 
         lblResult1.setFont(new java.awt.Font("Comic Sans MS", 1, 21)); // NOI18N
         lblResult1.setText("39 ºC");
-        getContentPane().add(lblResult1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 180, 70, 50));
+        getContentPane().add(lblResult1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 180, 310, 50));
 
         lblParameter3.setFont(new java.awt.Font("Comic Sans MS", 1, 21)); // NOI18N
         lblParameter3.setText("Resistência: ");
@@ -209,21 +218,21 @@ public class Interface extends javax.swing.JFrame {
         getContentPane().add(lblResult3, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 270, 130, 30));
 
         lblResult4.setFont(new java.awt.Font("Comic Sans MS", 1, 21)); // NOI18N
-        lblResult4.setText("Desligada");
+        lblResult4.setText("Desligado");
         getContentPane().add(lblResult4, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 190, 170, 30));
 
         lblResult5.setFont(new java.awt.Font("Comic Sans MS", 1, 21)); // NOI18N
         lblResult5.setText("2");
         getContentPane().add(lblResult5, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 230, 80, 30));
 
-        lblParameter10.setFont(new java.awt.Font("Comic Sans MS", 1, 21)); // NOI18N
-        lblParameter10.setText("Temperatura: ");
-        getContentPane().add(lblParameter10, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 180, 170, 50));
+        lblParameter1.setFont(new java.awt.Font("Comic Sans MS", 1, 21)); // NOI18N
+        lblParameter1.setText("Temperatura: ");
+        getContentPane().add(lblParameter1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 180, 170, 50));
 
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 8.png"))); // NOI18N
         getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 130, 570, 200));
 
-        jLabel22.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
+        jLabel22.setFont(new java.awt.Font("Comic Sans MS", 1, 20)); // NOI18N
         jLabel22.setText("<html><center>NOVA BRASSAGEM<center></html>");
         getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 150, 80));
 
@@ -244,19 +253,23 @@ public class Interface extends javax.swing.JFrame {
 
     private void btnTank2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTank2ActionPerformed
         // TODO add your handling code here:
-        System.out.println("Hello World");
+        tankControled = 2;
     }//GEN-LAST:event_btnTank2ActionPerformed
 
     private void btnTank1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTank1ActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here
+         tankControled = 1;
+        
     }//GEN-LAST:event_btnTank1ActionPerformed
 
     private void btnTank3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTank3ActionPerformed
         // TODO add your handling code here:
+        tankControled = 3;
     }//GEN-LAST:event_btnTank3ActionPerformed
 
     private void btnEmergencyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmergencyActionPerformed
         // TODO add your handling code here:
+        new StatusController().resetStatus();
     }//GEN-LAST:event_btnEmergencyActionPerformed
 
     private void btnChangeModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeModeActionPerformed
@@ -332,7 +345,7 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel lblBomb;
-    private javax.swing.JLabel lblParameter10;
+    private javax.swing.JLabel lblParameter1;
     private javax.swing.JLabel lblParameter2;
     private javax.swing.JLabel lblParameter3;
     private javax.swing.JLabel lblParameter4;
@@ -344,4 +357,67 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JLabel lblResult5;
     private javax.swing.JLabel lblTankNumber;
     // End of variables declaration//GEN-END:variables
+
+
+    class TankController implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+           status = new StatusController();
+           lblBomb.setText(booleanStatus(status.readStatus().getBoolean("Bomb")));
+            
+            switch(tankControled){
+                case 1:
+                    lblTankNumber.setText("Tanque 1");
+                    
+                    lblParameter1.setText("Temperatura:");
+                    lblParameter2.setText("SetPoint:");
+                    lblParameter3.setText("Resistência:");
+                    lblParameter4.setText("Motor:");
+                    lblParameter5.setText("Rampa atual:");
+                    
+                    lblResult1.setText(Integer.toString(status.readStatus().getJSONObject("Tank1").getInt("Temperature")) + "ºC");
+                    lblResult2.setText(Integer.toString(status.readStatus().getJSONObject("Tank1").getInt("SetPoint")) + "ºC");
+                    lblResult3.setText(booleanStatus(status.readStatus().getJSONObject("Tank1").getBoolean("Resistence")));
+                    lblResult4.setText(booleanStatus(status.readStatus().getJSONObject("Tank1").getBoolean("Motor")));
+                    lblResult5.setText(Integer.toString(status.readStatus().getJSONObject("Tank1").getInt("ActualRamp")));
+                    break;
+                case 2:
+                    lblTankNumber.setText("Tanque 2");
+                    
+                    lblParameter1.setText("Motor:");
+                    lblParameter2.setText("");
+                    lblParameter3.setText("");
+                    lblParameter4.setText("");
+                    lblParameter5.setText("");
+                    
+                    lblResult1.setText(booleanStatus(status.readStatus().getJSONObject("Tank2").getBoolean("Motor")));
+                    lblResult2.setText("");
+                    lblResult3.setText("");
+                    lblResult4.setText("");
+                    lblResult5.setText("");
+                    break;
+                case 3:
+                    lblTankNumber.setText("Tanque 3");
+                    
+                    lblParameter1.setText("Temperatura:");
+                    lblParameter2.setText("SetPoint");
+                    lblParameter3.setText("Resistência:");
+                    lblParameter4.setText("");
+                    lblParameter5.setText("");
+                    lblResult1.setText(Integer.toString(status.readStatus().getJSONObject("Tank3").getInt("Temperature")) + "ºC");
+                    lblResult2.setText(Integer.toString(status.readStatus().getJSONObject("Tank3").getInt("SetPoint")) + "ºC");
+                    lblResult3.setText(booleanStatus(status.readStatus().getJSONObject("Tank3").getBoolean("Resistence")));
+                    lblResult4.setText("");
+                    lblResult5.setText("");
+                    break;
+            }
+        }
+        
+        private String booleanStatus(boolean status){
+            if(status) return "LIGADO";
+            else return "DESLIGADO";
+        }
+        
+    }
 }

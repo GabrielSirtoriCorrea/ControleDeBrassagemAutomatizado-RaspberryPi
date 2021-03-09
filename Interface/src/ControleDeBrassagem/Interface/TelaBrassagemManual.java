@@ -5,12 +5,15 @@
  */
 package ControleDeBrassagem.Interface;
 
+import org.json.simple.JSONObject;
+
 /**
  *
  * @author Gazebo
  */
 public class TelaBrassagemManual extends javax.swing.JFrame {
-
+    boolean newStatus;
+    StatusController status;
     /**
      * Creates new form TelaBrassagemManual
      */
@@ -18,6 +21,9 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
         this.setExtendedState(Interface.MAXIMIZED_BOTH); 
         this.setUndecorated(true);
         initComponents();
+        status = new StatusController();
+        status.writeStatus(null, "BrewMode", "Manual");
+        System.out.println(status.readStatus().get("Bomb"));
     }
 
     /**
@@ -59,7 +65,7 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
         jLabel3.setText("EMERGÊNCIA");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 540, 170, 30));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 540, 240, 30));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Ellipse 1.png"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 200, 190));
@@ -182,26 +188,47 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
 
     private void btnBombActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBombActionPerformed
         // TODO add your handling code here:
+        status = new StatusController();
+        newStatus =  !status.readStatus().getBoolean("Bomb");
+        status.writeStatus(null, "Bomb", newStatus);
+        System.out.println(status.readStatus().get("Bomb"));
     }//GEN-LAST:event_btnBombActionPerformed
 
     private void btnMotorTank2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMotorTank2ActionPerformed
-        // TODO add your handling code here:
+        status = new StatusController();
+        newStatus =  !status.readStatus().getJSONObject("Tank2").getBoolean("Motor");
+        status.writeStatus("Tank2", "Motor", newStatus);
+        System.out.println(status.readStatus().getJSONObject("Tank2").getBoolean("Motor"));
     }//GEN-LAST:event_btnMotorTank2ActionPerformed
 
     private void btnResistanceTank3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResistanceTank3ActionPerformed
         // TODO add your handling code here:
+        status = new StatusController();
+        newStatus =  !status.readStatus().getJSONObject("Tank3").getBoolean("Resistence");
+        status.writeStatus("Tank3", "Resistence", newStatus);
+        System.out.println(status.readStatus().getJSONObject("Tank3").getBoolean("Resistence"));
     }//GEN-LAST:event_btnResistanceTank3ActionPerformed
 
     private void btnResistanceTank1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResistanceTank1ActionPerformed
         // TODO add your handling code here:
+        status = new StatusController();
+        newStatus =  !status.readStatus().getJSONObject("Tank1").getBoolean("Resistence");
+        status.writeStatus("Tank1", "Resistence", newStatus);
+        System.out.println(status.readStatus().getJSONObject("Tank1").getBoolean("Resistence"));
     }//GEN-LAST:event_btnResistanceTank1ActionPerformed
 
     private void btnMotorTank1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMotorTank1ActionPerformed
         // TODO add your handling code here:
+        status = new StatusController();
+        newStatus =  !status.readStatus().getJSONObject("Tank1").getBoolean("Motor");
+        status.writeStatus("Tank1", "Motor", newStatus);
+        System.out.println(status.readStatus().getJSONObject("Tank1").getBoolean("Motor"));
     }//GEN-LAST:event_btnMotorTank1ActionPerformed
 
     private void btnEmergencyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmergencyActionPerformed
         // TODO add your handling code here:
+        new StatusController().resetStatus();
+        
     }//GEN-LAST:event_btnEmergencyActionPerformed
 
     private void btnChangeModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeModeActionPerformed
