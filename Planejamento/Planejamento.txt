@@ -13,6 +13,7 @@ tanque 1 (Mostura):
 	Resistência = Booleano
 	AlertaMalte: Boolean
 	Rampas = Lista
+	RampaAtual: Inteiro
 	Válvulas p/ Clarificação =  Boolean
 
 tanque 2 (Clarificação):
