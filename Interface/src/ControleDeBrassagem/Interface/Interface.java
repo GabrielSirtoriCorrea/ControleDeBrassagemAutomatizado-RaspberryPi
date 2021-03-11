@@ -25,6 +25,7 @@ public class Interface extends javax.swing.JFrame {
         toFront();
         initComponents();
         status = new StatusController();
+        status.resetStatus();
         status.writeStatus(null, "BrewMode", "Automatic");
         System.out.println(status.readStatus().get("BrewMode"));
         Timer timer = new Timer(1000, new TankController());
@@ -56,12 +57,11 @@ public class Interface extends javax.swing.JFrame {
         btnTank3 = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         lblBomb = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         btnChangeMode = new javax.swing.JButton();
         btnEmergency = new javax.swing.JButton();
-        lblParameter2 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
+        lblParameter2 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         lblParameter5 = new javax.swing.JLabel();
         lblParameter4 = new javax.swing.JLabel();
@@ -76,6 +76,7 @@ public class Interface extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         btnNewBrew = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         jLabel15.setText("jLabel15");
@@ -148,14 +149,11 @@ public class Interface extends javax.swing.JFrame {
 
         jLabel13.setFont(new java.awt.Font("Comic Sans MS", 1, 20)); // NOI18N
         jLabel13.setText("BOMBA:");
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 30, 140, 40));
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 20, 140, 40));
 
         lblBomb.setFont(new java.awt.Font("Comic Sans MS", 1, 20)); // NOI18N
         lblBomb.setText("DESLIGADA");
-        getContentPane().add(lblBomb, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 30, 170, 40));
-
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 10.png"))); // NOI18N
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 20, 260, 60));
+        getContentPane().add(lblBomb, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 20, 170, 40));
 
         jLabel20.setFont(new java.awt.Font("Comic Sans MS", 1, 20)); // NOI18N
         jLabel20.setText("<html><center> ALTERAR MODO <center></html>");
@@ -178,13 +176,13 @@ public class Interface extends javax.swing.JFrame {
         });
         getContentPane().add(btnEmergency, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 530, 150, 90));
 
+        jLabel21.setFont(new java.awt.Font("Comic Sans MS", 1, 20)); // NOI18N
+        jLabel21.setText("MODO DE BRASSAGEM: AUTOMÁTICO");
+        getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 490, 50));
+
         lblParameter2.setFont(new java.awt.Font("Comic Sans MS", 1, 21)); // NOI18N
         lblParameter2.setText("SetPoint:");
         getContentPane().add(lblParameter2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 220, 130, 50));
-
-        jLabel21.setFont(new java.awt.Font("Comic Sans MS", 1, 20)); // NOI18N
-        jLabel21.setText("MODO DE BRASSAGEM: AUTOMÁTICO");
-        getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 490, 50));
 
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 9.png"))); // NOI18N
         getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 440, 70));
@@ -244,6 +242,9 @@ public class Interface extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnNewBrew, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 150, 80));
+
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 10.png"))); // NOI18N
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 10, 260, 60));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Wallpaper.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1290, 720));
@@ -328,8 +329,8 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;

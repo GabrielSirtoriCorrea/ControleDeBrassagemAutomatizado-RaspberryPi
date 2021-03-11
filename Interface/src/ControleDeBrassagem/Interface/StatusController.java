@@ -62,7 +62,7 @@ public class StatusController {
     
     public static void resetStatus(){
         try { 
-            jsonObject = new JSONObject("{\"Tank3\":{\"Temperature\":0,\"NextProcess\":false,\"Hops\":[[1,\"00:00\"],[2,\"00:00\"]],\"SetPoint\":0,\"Resistence\":false,\"HopAlert\":false},\"Tank2\":{\"Motor\":false,\"NextProcess\":false},\"BrewMode\":\"Automatic\",\"Tank1\":{\"InicialSetPoint\":0,\"Ramps\":[[1,\"00:00\"],[2,\"00:00\"]],\"ActualRamp\":0,\"MaltAlert\":false,\"Temperature\":0,\"Motor\":false,\"NextProcess\":false,\"Resistence\":false},\"Bomb\":false,\"Brew\":\"Stoped\"}");
+            jsonObject = new JSONObject("{\"Tank3\":{\"Temperature\":0,\"NextProcess\":false,\"Hops\":[[1,\"00:00\"],[2,\"00:00\"]],\"SetPoint\":0,\"Resistence\":false,\"HopAlert\":false},\"Tank2\":{\"Motor\":false,\"NextProcess\":false},\"BrewMode\":\"Automatic\",\"Tank1\":{\"SetPoint\":0,\"Ramps\":[[1,\"00:00\"],[2,\"00:00\"]],\"ActualRamp\":0,\"MaltAlert\":false,\"Temperature\":0,\"Motor\":false,\"NextProcess\":false,\"Resistence\":false},\"Bomb\":false}");
             writer = new FileWriter("../status.json");
             writer.write(jsonObject.toString());
             writer.close();

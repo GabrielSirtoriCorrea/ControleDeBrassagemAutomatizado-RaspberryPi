@@ -5,7 +5,10 @@
  */
 package ControleDeBrassagem.Interface;
 
-import org.json.simple.JSONObject;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
+import javax.swing.Timer;
 
 /**
  *
@@ -14,16 +17,30 @@ import org.json.simple.JSONObject;
 public class TelaBrassagemManual extends javax.swing.JFrame {
     boolean newStatus;
     StatusController status;
+    int newValue;
+    ImageIcon ledON;
+    ImageIcon ledOFF;
     /**
      * Creates new form TelaBrassagemManual
      */
     public TelaBrassagemManual() {
+        
         this.setExtendedState(Interface.MAXIMIZED_BOTH); 
         this.setUndecorated(true);
+        
+        ledON = new ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/BtnON.png"));
+        ledOFF = new ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/BtnOFF.png"));
+        
         initComponents();
         status = new StatusController();
+        status.resetStatus();
         status.writeStatus(null, "BrewMode", "Manual");
-        System.out.println(status.readStatus().get("Bomb"));
+        
+        lblSetpointTank1.setText(Integer.toString(status.readStatus().getJSONObject("Tank1").getInt("SetPoint"))+ "ºC");
+        lblSetpointTank3.setText(Integer.toString(status.readStatus().getJSONObject("Tank3").getInt("SetPoint"))+ "ºC");
+        
+        Timer timer = new Timer(1000, new TempControl());
+        timer.start();
     }
 
     /**
@@ -44,19 +61,30 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
         btnMotorTank2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         btnMotorTank1 = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        btnResistanceTank1 = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-        btnResistanceTank3 = new javax.swing.JButton();
+        ledBomb = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         btnBomb = new javax.swing.JButton();
-        ledBomb = new javax.swing.JLabel();
-        ledResistenceTank1 = new javax.swing.JLabel();
         ledMotorTank2 = new javax.swing.JLabel();
         ledMotorTank1 = new javax.swing.JLabel();
-        ledResistenceTank3 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         btnChangeMode = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        lblSetpointTank3 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        lblTempTank1 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        btnSubSetpointTank3 = new javax.swing.JButton();
+        btnAdSetpointTank1 = new javax.swing.JButton();
+        btnSubSetpointTank1 = new javax.swing.JButton();
+        jLabel23 = new javax.swing.JLabel();
+        btnAdSetpointTank3 = new javax.swing.JButton();
+        lblTempTank3 = new javax.swing.JLabel();
+        lblSetpointTank1 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -85,9 +113,9 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 9.png"))); // NOI18N
         getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 630, 70));
 
-        jLabel5.setFont(new java.awt.Font("Comic Sans MS", 1, 28)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         jLabel5.setText("<html><center>MOTOR  TANQUE 2<center></html>");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 390, 170, 100));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 390, 160, 100));
 
         btnMotorTank2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 18.png"))); // NOI18N
         btnMotorTank2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -97,11 +125,11 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
                 btnMotorTank2ActionPerformed(evt);
             }
         });
-        getContentPane().add(btnMotorTank2, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 390, 170, 100));
+        getContentPane().add(btnMotorTank2, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 390, 160, 100));
 
         jLabel4.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
         jLabel4.setText("<html><center>MOTOR \nTANQUE 1<center></html>");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 130, 170, 100));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 130, 170, 100));
 
         btnMotorTank1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 18.png"))); // NOI18N
         btnMotorTank1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -111,37 +139,14 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
                 btnMotorTank1ActionPerformed(evt);
             }
         });
-        getContentPane().add(btnMotorTank1, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 130, 170, 100));
+        getContentPane().add(btnMotorTank1, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 130, 170, 100));
 
-        jLabel6.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
-        jLabel6.setText("<html><center>RESISTÊNCIA TANQUE 1<center></html>");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 130, 180, 100));
-
-        btnResistanceTank1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 18.png"))); // NOI18N
-        btnResistanceTank1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        btnResistanceTank1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnResistanceTank1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnResistanceTank1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 130, 170, 100));
-
-        jLabel7.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
-        jLabel7.setText("<html><center>RESISTÊNCIA TANQUE 3<center></html>");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 390, 180, 100));
-
-        btnResistanceTank3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 18.png"))); // NOI18N
-        btnResistanceTank3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        btnResistanceTank3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnResistanceTank3ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnResistanceTank3, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 390, 170, 100));
+        ledBomb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/BtnOFF.png"))); // NOI18N
+        getContentPane().add(ledBomb, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 390, -1, 80));
 
         jLabel8.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
         jLabel8.setText("<html><center>BOMBA<center></html>");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 260, 140, 100));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 270, 140, 100));
 
         btnBomb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 18.png"))); // NOI18N
         btnBomb.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -150,26 +155,17 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
                 btnBombActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBomb, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, 170, 100));
-
-        ledBomb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/BtnOFF.png"))); // NOI18N
-        getContentPane().add(ledBomb, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 400, -1, 80));
-
-        ledResistenceTank1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/BtnOFF.png"))); // NOI18N
-        getContentPane().add(ledResistenceTank1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 240, -1, 80));
+        getContentPane().add(btnBomb, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 270, 170, 100));
 
         ledMotorTank2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/BtnOFF.png"))); // NOI18N
-        getContentPane().add(ledMotorTank2, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 510, -1, 80));
+        getContentPane().add(ledMotorTank2, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 510, -1, 80));
 
         ledMotorTank1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/BtnOFF.png"))); // NOI18N
-        getContentPane().add(ledMotorTank1, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 240, -1, 80));
-
-        ledResistenceTank3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/BtnOFF.png"))); // NOI18N
-        getContentPane().add(ledResistenceTank3, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 510, -1, 80));
+        getContentPane().add(ledMotorTank1, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 250, -1, 80));
 
         jLabel14.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
         jLabel14.setText("<html><center>ALTERAR MODO<center></html>");
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 150, 80));
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 150, 80));
 
         btnChangeMode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 16.png"))); // NOI18N
         btnChangeMode.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -178,7 +174,83 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
                 btnChangeModeActionPerformed(evt);
             }
         });
-        getContentPane().add(btnChangeMode, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 150, 80));
+        getContentPane().add(btnChangeMode, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 150, 80));
+
+        jLabel9.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        jLabel9.setText("<html><center>TANQUE 3:<center></html>");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 420, 140, 50));
+
+        jLabel10.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        jLabel10.setText("<html><center>CONTROLE DE TEMPERATURA<center></html>");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 130, 240, 100));
+
+        jLabel11.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        jLabel11.setText("<html><center>SETPOINT:<center></html>");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 470, 130, 50));
+
+        jLabel12.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        jLabel12.setText("<html><center>TANQUE 1:<center></html>");
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 250, 130, 50));
+
+        lblSetpointTank3.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        lblSetpointTank3.setText("<html><center>39ºC<center></html>");
+        getContentPane().add(lblSetpointTank3, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 470, 70, 50));
+
+        jLabel15.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        jLabel15.setText("<html><center>SETPOINT:<center></html>");
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 300, 130, 50));
+
+        lblTempTank1.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        lblTempTank1.setText("<html><center>39ºC<center></html>");
+        getContentPane().add(lblTempTank1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 250, 70, 50));
+
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Polygon 7.png"))); // NOI18N
+        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 320, 50, 60));
+
+        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Polygon 6.png"))); // NOI18N
+        getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 280, 60, 60));
+
+        jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Polygon 7.png"))); // NOI18N
+        getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 490, 50, 60));
+
+        btnSubSetpointTank3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubSetpointTank3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSubSetpointTank3, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 510, 20, 20));
+
+        btnAdSetpointTank1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdSetpointTank1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnAdSetpointTank1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 300, 20, 20));
+
+        btnSubSetpointTank1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubSetpointTank1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSubSetpointTank1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 340, 20, 20));
+
+        jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Polygon 6.png"))); // NOI18N
+        getContentPane().add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 450, 60, 60));
+
+        btnAdSetpointTank3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdSetpointTank3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnAdSetpointTank3, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 470, 20, 20));
+
+        lblTempTank3.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        lblTempTank3.setText("<html><center>39ºC<center></html>");
+        getContentPane().add(lblTempTank3, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 420, 70, 50));
+
+        lblSetpointTank1.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        lblSetpointTank1.setText("<html><center>39ºC<center></html>");
+        getContentPane().add(lblSetpointTank1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 300, 70, 50));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Wallpaper.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
@@ -191,43 +263,18 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
         status = new StatusController();
         newStatus =  !status.readStatus().getBoolean("Bomb");
         status.writeStatus(null, "Bomb", newStatus);
-        System.out.println(status.readStatus().get("Bomb"));
+        if(newStatus){
+            ledBomb.setIcon(ledON);
+        }else{
+            ledBomb.setIcon(ledOFF);
+        }
     }//GEN-LAST:event_btnBombActionPerformed
-
-    private void btnMotorTank2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMotorTank2ActionPerformed
-        status = new StatusController();
-        newStatus =  !status.readStatus().getJSONObject("Tank2").getBoolean("Motor");
-        status.writeStatus("Tank2", "Motor", newStatus);
-        System.out.println(status.readStatus().getJSONObject("Tank2").getBoolean("Motor"));
-    }//GEN-LAST:event_btnMotorTank2ActionPerformed
-
-    private void btnResistanceTank3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResistanceTank3ActionPerformed
-        // TODO add your handling code here:
-        status = new StatusController();
-        newStatus =  !status.readStatus().getJSONObject("Tank3").getBoolean("Resistence");
-        status.writeStatus("Tank3", "Resistence", newStatus);
-        System.out.println(status.readStatus().getJSONObject("Tank3").getBoolean("Resistence"));
-    }//GEN-LAST:event_btnResistanceTank3ActionPerformed
-
-    private void btnResistanceTank1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResistanceTank1ActionPerformed
-        // TODO add your handling code here:
-        status = new StatusController();
-        newStatus =  !status.readStatus().getJSONObject("Tank1").getBoolean("Resistence");
-        status.writeStatus("Tank1", "Resistence", newStatus);
-        System.out.println(status.readStatus().getJSONObject("Tank1").getBoolean("Resistence"));
-    }//GEN-LAST:event_btnResistanceTank1ActionPerformed
-
-    private void btnMotorTank1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMotorTank1ActionPerformed
-        // TODO add your handling code here:
-        status = new StatusController();
-        newStatus =  !status.readStatus().getJSONObject("Tank1").getBoolean("Motor");
-        status.writeStatus("Tank1", "Motor", newStatus);
-        System.out.println(status.readStatus().getJSONObject("Tank1").getBoolean("Motor"));
-    }//GEN-LAST:event_btnMotorTank1ActionPerformed
 
     private void btnEmergencyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmergencyActionPerformed
         // TODO add your handling code here:
         new StatusController().resetStatus();
+        lblSetpointTank1.setText("0ºC");
+        lblSetpointTank3.setText("0ºC");
         
     }//GEN-LAST:event_btnEmergencyActionPerformed
 
@@ -236,6 +283,68 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
         new Interface().setVisible(true);
         dispose();
     }//GEN-LAST:event_btnChangeModeActionPerformed
+
+    private void btnSubSetpointTank3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubSetpointTank3ActionPerformed
+        // TODO add your handling code here:
+        status = new StatusController();
+        newValue =  status.readStatus().getJSONObject("Tank3").getInt("SetPoint") - 1;
+        status.writeStatus("Tank3", "SetPoint", newValue);
+        System.out.println(status.readStatus().getJSONObject("Tank3").getInt("SetPoint"));
+        lblSetpointTank3.setText(Integer.toString(newValue)+"ºC");
+        
+    }//GEN-LAST:event_btnSubSetpointTank3ActionPerformed
+
+    private void btnAdSetpointTank1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdSetpointTank1ActionPerformed
+        // TODO add your handling code here:
+        status = new StatusController();
+        newValue =  status.readStatus().getJSONObject("Tank1").getInt("SetPoint") + 1;
+        status.writeStatus("Tank1", "SetPoint", newValue);
+        System.out.println(status.readStatus().getJSONObject("Tank1").getInt("SetPoint"));
+        lblSetpointTank1.setText(Integer.toString(newValue)+"ºC");
+    }//GEN-LAST:event_btnAdSetpointTank1ActionPerformed
+
+    private void btnAdSetpointTank3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdSetpointTank3ActionPerformed
+        // TODO add your handling code here:
+        status = new StatusController();
+        newValue =  status.readStatus().getJSONObject("Tank3").getInt("SetPoint") + 1;
+        status.writeStatus("Tank3", "SetPoint", newValue);
+        System.out.println(status.readStatus().getJSONObject("Tank3").getInt("SetPoint"));
+        lblSetpointTank3.setText(Integer.toString(newValue)+"ºC");
+    }//GEN-LAST:event_btnAdSetpointTank3ActionPerformed
+
+    private void btnSubSetpointTank1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubSetpointTank1ActionPerformed
+        // TODO add your handling code here:
+        status = new StatusController();
+        newValue =  status.readStatus().getJSONObject("Tank1").getInt("SetPoint") - 1;
+        status.writeStatus("Tank1", "SetPoint", newValue);
+        System.out.println(status.readStatus().getJSONObject("Tank1").getInt("SetPoint"));
+        lblSetpointTank1.setText(Integer.toString(newValue)+"ºC");
+    }//GEN-LAST:event_btnSubSetpointTank1ActionPerformed
+
+    private void btnMotorTank1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMotorTank1ActionPerformed
+        // TODO add your handling code here:
+        status = new StatusController();
+        newStatus =  !status.readStatus().getJSONObject("Tank1").getBoolean("Motor");
+        status.writeStatus("Tank1", "Motor", newStatus);
+        System.out.println(status.readStatus().getJSONObject("Tank1").getBoolean("Motor"));
+        if(newStatus){
+            ledMotorTank1.setIcon(ledON);
+        }else{
+            ledMotorTank1.setIcon(ledOFF);
+        }
+    }//GEN-LAST:event_btnMotorTank1ActionPerformed
+
+    private void btnMotorTank2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMotorTank2ActionPerformed
+        status = new StatusController();
+        newStatus =  !status.readStatus().getJSONObject("Tank2").getBoolean("Motor");
+        status.writeStatus("Tank2", "Motor", newStatus);
+        System.out.println(status.readStatus().getJSONObject("Tank2").getBoolean("Motor"));
+        if(newStatus){
+            ledMotorTank2.setIcon(ledON);
+        }else{
+            ledMotorTank2.setIcon(ledOFF);
+        }
+    }//GEN-LAST:event_btnMotorTank2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -273,28 +382,51 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdSetpointTank1;
+    private javax.swing.JButton btnAdSetpointTank3;
     private javax.swing.JButton btnBomb;
     private javax.swing.JButton btnChangeMode;
     private javax.swing.JButton btnEmergency;
     private javax.swing.JButton btnMotorTank1;
     private javax.swing.JButton btnMotorTank2;
-    private javax.swing.JButton btnResistanceTank1;
-    private javax.swing.JButton btnResistanceTank3;
+    private javax.swing.JButton btnSubSetpointTank1;
+    private javax.swing.JButton btnSubSetpointTank3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel lblSetpointTank1;
+    private javax.swing.JLabel lblSetpointTank3;
+    private javax.swing.JLabel lblTempTank1;
+    private javax.swing.JLabel lblTempTank3;
     private javax.swing.JLabel ledBomb;
     private javax.swing.JLabel ledMotorTank1;
     private javax.swing.JLabel ledMotorTank2;
-    private javax.swing.JLabel ledResistenceTank1;
-    private javax.swing.JLabel ledResistenceTank3;
     // End of variables declaration//GEN-END:variables
+
+
+   class TempControl implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            status = new StatusController();
+            lblTempTank1.setText(Integer.toString(status.readStatus().getJSONObject("Tank1").getInt("Temperature"))+ "ºC");
+            lblTempTank3.setText(Integer.toString(status.readStatus().getJSONObject("Tank3").getInt("Temperature"))+ "ºC");
+        }
+       
+    }
 }

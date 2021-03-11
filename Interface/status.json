@@ -1,0 +1,1 @@
+{"Tank3":{"Temperature":0,"NextProcess":false,"Hops":[[1,"00:00"],[2,"00:00"]],"SetPoint":0,"Resistence":false,"HopAlert":false},"Tank2":{"Motor":true,"NextProcess":false},"BrewMode":"Manual","Tank1":{"Ramps":[[1,"00:00"],[2,"00:00"]],"MaltAlert":false,"Temperature":0,"Motor":false,"NextProcess":false,"SetPoint":0,"ActualRamp":0,"Resistence":false},"Bomb":true}
