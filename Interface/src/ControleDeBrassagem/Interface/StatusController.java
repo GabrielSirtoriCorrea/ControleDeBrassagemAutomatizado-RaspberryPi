@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONObject;
+import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
@@ -60,9 +61,34 @@ public class StatusController {
         }
     }
     
+    public static void writeStatus(String  tank, String target, JSONArray value){
+        try {
+            if(tank != null){
+                originalJson = readStatus();
+                jsonObject = readStatus().getJSONObject(tank);
+                jsonObject.put(target, value);
+                originalJson.put(tank, jsonObject);
+                System.out.println(jsonObject);
+                writer = new FileWriter("../status.json");
+                
+                writer.write(originalJson.toString());
+            }else{
+                 jsonObject = readStatus();
+                 writer = new FileWriter("../status.json");
+                System.out.println(jsonObject);
+                jsonObject.put(target, value);
+                writer.write(jsonObject.toString());
+            }
+            
+            writer.close();
+        } catch (IOException ex) {
+           ex.printStackTrace();
+        }
+    }
+    
     public static void resetStatus(){
         try { 
-            jsonObject = new JSONObject("{\"Tank3\":{\"Temperature\":0,\"NextProcess\":false,\"Hops\":[[1,\"00:00\"],[2,\"00:00\"]],\"SetPoint\":0,\"Resistence\":false,\"HopAlert\":false},\"Tank2\":{\"Motor\":false,\"NextProcess\":false},\"BrewMode\":\"Automatic\",\"Tank1\":{\"SetPoint\":0,\"Ramps\":[[1,\"00:00\"],[2,\"00:00\"]],\"ActualRamp\":0,\"MaltAlert\":false,\"Temperature\":0,\"Motor\":false,\"NextProcess\":false,\"Resistence\":false},\"Bomb\":false}");
+            jsonObject = new JSONObject("{\"BrewStatus\":\"Pausado\",\"Tank3\":{\"Temperature\":0,\"NextProcess\":false,\"Hops\":[0,0,0],\"BoilTime\":0,\"SetPoint\":0,\"Resistence\":false,\"HopAlert\":false},\"Tank2\":{\"ClarificationTime\":0,\"Motor\":false,\"NextProcess\":false},\"BrewMode\":\"Automatic\",\"Tank1\":{\"Ramps\":[[0,0],[0,0]],\"MaltAlert\":false,\"Temperature\":0,\"Motor\":false,\"NextProcess\":false,\"SetPoint\":0,\"ActualRamp\":0,\"Resistence\":false},\"Bomb\":false}");
             writer = new FileWriter("../status.json");
             writer.write(jsonObject.toString());
             writer.close();

@@ -5,12 +5,25 @@
  */
 package ControleDeBrassagem.Interface;
 
+import org.json.simple.JSONArray;
+
 /**
  *
  * @author Gazebo
  */
 public class TelaNovaBrassagem extends javax.swing.JFrame {
-
+    int targetValue;
+    int target1Value;
+    int config;
+    int rampsNumber;
+    int actualRamp;
+    int hopsNumber;
+    int actualHop;
+    StatusController status;
+    JSONArray  allHopsArray;
+    JSONArray allRampsArray;
+    JSONArray actualRampArray;
+    
     /**
      * Creates new form TelaNovaBrassagem
      */
@@ -18,6 +31,18 @@ public class TelaNovaBrassagem extends javax.swing.JFrame {
         this.setExtendedState(Interface.MAXIMIZED_BOTH); 
         this.setUndecorated(true);
         initComponents();
+        //JOptionPane.showMessageDialog(this, "ADICIONE O MALTE NA PANELA DE MOSTURAÇÃO!!!", "ATENÇÃO!!!", JOptionPane.WARNING_MESSAGE);
+        config = 0;
+        actualRamp = 1;
+        actualHop = 1;
+        targetValue = 0;
+        target1Value = 0;
+        lblTarget.setText("0");
+        lblTarget1.setText("0");
+        allRampsArray  = new JSONArray();
+        allHopsArray  = new JSONArray();
+       
+        setSecondConfigVisible(false);
     }
 
     /**
@@ -31,20 +56,25 @@ public class TelaNovaBrassagem extends javax.swing.JFrame {
 
         jLabel2 = new javax.swing.JLabel();
         lblTarget = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        btnLeftArrow = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
+        lblNext = new javax.swing.JLabel();
+        iconTopArrow1 = new javax.swing.JLabel();
+        iconTopArrow = new javax.swing.JLabel();
         btnTopArrow = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
+        iconBottomArrow1 = new javax.swing.JLabel();
+        iconBottomArrow = new javax.swing.JLabel();
         btnBottomArrow = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        btnRightArrow = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
+        lblConfig = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         btnCancel = new javax.swing.JButton();
         btnNext = new javax.swing.JButton();
+        lblConfig1 = new javax.swing.JLabel();
+        lblTarget1 = new javax.swing.JLabel();
+        lblUnidTarget1 = new javax.swing.JLabel();
+        iconTargetBkg1 = new javax.swing.JLabel();
+        lblUnidTarget = new javax.swing.JLabel();
+        iconTargetBkg = new javax.swing.JLabel();
+        btnBottomArrow1 = new javax.swing.JButton();
+        btnTopArrow1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -56,43 +86,43 @@ public class TelaNovaBrassagem extends javax.swing.JFrame {
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, -1, -1));
 
         lblTarget.setFont(new java.awt.Font("Comic Sans MS", 1, 30)); // NOI18N
-        lblTarget.setText("39ºC");
-        getContentPane().add(lblTarget, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 160, 100, 70));
+        lblTarget.setText("39");
+        getContentPane().add(lblTarget, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 200, 60, 80));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 34.png"))); // NOI18N
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 150, 110, 90));
+        lblNext.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
+        lblNext.setText("PRÓXIMO");
+        getContentPane().add(lblNext, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 520, 180, 50));
 
-        jLabel5.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
-        jLabel5.setText("PRÓXIMO");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 520, 180, 50));
+        iconTopArrow1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Polygon 1.png"))); // NOI18N
+        getContentPane().add(iconTopArrow1, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 350, 100, 60));
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Polygon 2.png"))); // NOI18N
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 510, 80, 90));
+        iconTopArrow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Polygon 1.png"))); // NOI18N
+        getContentPane().add(iconTopArrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 180, 100, 60));
 
-        btnLeftArrow.addActionListener(new java.awt.event.ActionListener() {
+        btnTopArrow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLeftArrowActionPerformed(evt);
+                btnTopArrowActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLeftArrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 540, 40, 30));
+        getContentPane().add(btnTopArrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 200, 40, 30));
 
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Polygon 1.png"))); // NOI18N
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 440, 100, 60));
-        getContentPane().add(btnTopArrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 460, 40, 30));
+        iconBottomArrow1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Polygon 5.png"))); // NOI18N
+        getContentPane().add(iconBottomArrow1, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 410, 100, 70));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Polygon 5.png"))); // NOI18N
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 610, 80, 50));
+        iconBottomArrow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Polygon 5.png"))); // NOI18N
+        getContentPane().add(iconBottomArrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 240, 100, 70));
 
         btnBottomArrow.setBackground(new java.awt.Color(51, 153, 255));
-        getContentPane().add(btnBottomArrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 610, 40, 30));
+        btnBottomArrow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBottomArrowActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBottomArrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 250, 40, 30));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Polygon 4.png"))); // NOI18N
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 500, 50, 110));
-        getContentPane().add(btnRightArrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 540, 40, 30));
-
-        jLabel8.setFont(new java.awt.Font("Comic Sans MS", 1, 36)); // NOI18N
-        jLabel8.setText("Temperatura inicial panela 1:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, 600, 50));
+        lblConfig.setFont(new java.awt.Font("Comic Sans MS", 1, 36)); // NOI18N
+        lblConfig.setText("Temperatura inicial panela 1:");
+        getContentPane().add(lblConfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 600, 50));
 
         jLabel11.setFont(new java.awt.Font("Comic Sans MS", 1, 21)); // NOI18N
         jLabel11.setText("CANCELAR");
@@ -109,7 +139,49 @@ public class TelaNovaBrassagem extends javax.swing.JFrame {
 
         btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 11.png"))); // NOI18N
         btnNext.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnNext, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 520, 140, 50));
+
+        lblConfig1.setFont(new java.awt.Font("Comic Sans MS", 1, 36)); // NOI18N
+        lblConfig1.setText("Temperatura inicial panela 1:");
+        getContentPane().add(lblConfig1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, 600, 50));
+
+        lblTarget1.setFont(new java.awt.Font("Comic Sans MS", 1, 30)); // NOI18N
+        lblTarget1.setText("39");
+        getContentPane().add(lblTarget1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 370, 40, 80));
+
+        lblUnidTarget1.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        lblUnidTarget1.setText("min");
+        getContentPane().add(lblUnidTarget1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 370, 50, 80));
+
+        iconTargetBkg1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 34.png"))); // NOI18N
+        getContentPane().add(iconTargetBkg1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 360, 120, 100));
+
+        lblUnidTarget.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        lblUnidTarget.setText("ºC");
+        getContentPane().add(lblUnidTarget, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 200, 50, 80));
+
+        iconTargetBkg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 34.png"))); // NOI18N
+        getContentPane().add(iconTargetBkg, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 190, 120, 100));
+
+        btnBottomArrow1.setBackground(new java.awt.Color(51, 153, 255));
+        btnBottomArrow1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBottomArrow1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBottomArrow1, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 420, 40, 30));
+
+        btnTopArrow1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTopArrow1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnTopArrow1, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 370, 40, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Wallpaper.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
@@ -117,15 +189,115 @@ public class TelaNovaBrassagem extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnLeftArrowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeftArrowActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnLeftArrowActionPerformed
-
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         // TODO add your handling code here:
         new Interface().setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void btnBottomArrowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBottomArrowActionPerformed
+        // TODO add your handling code here:
+        targetValue--;
+        lblTarget.setText(Integer.toString(targetValue));
+    }//GEN-LAST:event_btnBottomArrowActionPerformed
+
+    private void btnTopArrowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTopArrowActionPerformed
+        // TODO add your handling code here:
+        targetValue++;
+        lblTarget.setText(Integer.toString(targetValue));
+    }//GEN-LAST:event_btnTopArrowActionPerformed
+
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        // TODO add your handling code here:
+        status = new StatusController();
+        actualRampArray = new JSONArray();
+        
+        switch(config){
+            case 0:
+                status.writeStatus("Tank1", "SetPoint", targetValue);
+                lblConfig.setText("Quantidade de rampas: ");
+                lblUnidTarget.setVisible(false);
+                setTargetsValues(0,0);
+                config++;
+                break;
+            case 1:
+                rampsNumber =  targetValue;
+                lblConfig.setText("Temperatura rampa 1:");
+                lblUnidTarget.setVisible(true);
+                lblConfig1.setText("tempo rampa 1:");
+                setSecondConfigVisible(true);
+                setTargetsValues(0,0);
+                config++;
+                break;
+            case 2:
+                actualRampArray.add(Integer.parseInt(lblTarget.getText()));
+                actualRampArray.add(Integer.parseInt(lblTarget1.getText()));
+                allRampsArray.add(actualRampArray);
+                rampsNumber--;
+                actualRamp++;
+                lblConfig.setText("Temperatura rampa " + Integer.toString(actualRamp) + ":");
+                lblConfig1.setText("tempo rampa "+ Integer.toString(actualRamp) + ":");
+                setTargetsValues(0,0);
+                if(rampsNumber ==  0){
+                    status.writeStatus("Tank1", "Ramps", allRampsArray);
+                    setSecondConfigVisible(false);
+                    lblConfig.setText("Tempo de clarificação:");
+                    lblUnidTarget.setText("min");
+                    config++;
+                }
+                break;
+            case 3:
+                status.writeStatus("Tank2", "ClarificationTime", Integer.parseInt(lblTarget.getText()));
+                setTargetsValues(0,0);
+                lblConfig.setText("Tempo de fervura:");
+                config++;
+                break;
+             case 4:
+                 status.writeStatus("Tank3", "BoilTime", Integer.parseInt(lblTarget.getText()));
+                 setTargetsValues(0,0);
+                 lblConfig.setText("Quantidade de Lúpulos: ");
+                 lblUnidTarget.setVisible(false);
+                  config++;
+                break;
+             case 5:
+                 hopsNumber = targetValue;
+                 lblConfig.setText("Tempo do 1º Lúpulo:");
+                 lblUnidTarget.setVisible(true);
+                 setTargetsValues(0,0);
+                config++;
+                break;
+             case 6:
+                 allHopsArray.add(Integer.parseInt(lblTarget.getText()));
+                 hopsNumber--;
+                 actualHop++;
+                 lblConfig.setText("Tempo do " + Integer.toString(actualHop) + "º  Lúpulo:");
+                 setTargetsValues(0,0);
+                 if(hopsNumber == 1){
+                     lblNext.setText("FINALIZAR");
+                 }
+                 if(hopsNumber == 0){
+                     status.writeStatus("Tank3", "Hops", allHopsArray);
+                     new Interface().setVisible(true);
+                    dispose();
+                 }
+                break;
+             case 7:
+                break;
+        }
+        
+    }//GEN-LAST:event_btnNextActionPerformed
+
+    private void btnBottomArrow1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBottomArrow1ActionPerformed
+        // TODO add your handling code here:
+        target1Value--;
+        lblTarget1.setText(Integer.toString(target1Value));
+    }//GEN-LAST:event_btnBottomArrow1ActionPerformed
+
+    private void btnTopArrow1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTopArrow1ActionPerformed
+        // TODO add your handling code here:
+        target1Value++;
+        lblTarget1.setText(Integer.toString(target1Value));
+    }//GEN-LAST:event_btnTopArrow1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -164,21 +336,47 @@ public class TelaNovaBrassagem extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBottomArrow;
+    private javax.swing.JButton btnBottomArrow1;
     private javax.swing.JButton btnCancel;
-    private javax.swing.JButton btnLeftArrow;
     private javax.swing.JButton btnNext;
-    private javax.swing.JButton btnRightArrow;
     private javax.swing.JButton btnTopArrow;
+    private javax.swing.JButton btnTopArrow1;
+    private javax.swing.JLabel iconBottomArrow;
+    private javax.swing.JLabel iconBottomArrow1;
+    private javax.swing.JLabel iconTargetBkg;
+    private javax.swing.JLabel iconTargetBkg1;
+    private javax.swing.JLabel iconTopArrow;
+    private javax.swing.JLabel iconTopArrow1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel lblConfig;
+    private javax.swing.JLabel lblConfig1;
+    private javax.swing.JLabel lblNext;
     private javax.swing.JLabel lblTarget;
+    private javax.swing.JLabel lblTarget1;
+    private javax.swing.JLabel lblUnidTarget;
+    private javax.swing.JLabel lblUnidTarget1;
     // End of variables declaration//GEN-END:variables
+
+
+private void setSecondConfigVisible(boolean value){
+    lblTarget1.setVisible(value);
+    lblConfig1.setVisible(value);
+    btnBottomArrow1.setVisible(value);
+    btnTopArrow1.setVisible(value);
+    iconBottomArrow1.setVisible(value);
+    iconTopArrow1.setVisible(value);
+    iconTargetBkg1.setVisible(value);
+    lblUnidTarget1.setVisible(value);
+}
+
+private void setTargetsValues(int t1, int t2){
+    targetValue  = t1;
+    lblTarget.setText(Integer.toString(t1));
+    target1Value  = t2;
+    lblTarget1.setText(Integer.toString(t2));
+}
+
+
 }
