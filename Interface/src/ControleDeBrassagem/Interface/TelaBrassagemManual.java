@@ -194,7 +194,7 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
 
         lblSetpointTank3.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
         lblSetpointTank3.setText("<html><center>39ºC<center></html>");
-        getContentPane().add(lblSetpointTank3, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 470, 70, 50));
+        getContentPane().add(lblSetpointTank3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 470, 90, 50));
 
         jLabel15.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         jLabel15.setText("<html><center>SETPOINT:<center></html>");
@@ -202,7 +202,7 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
 
         lblTempTank1.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
         lblTempTank1.setText("<html><center>39ºC<center></html>");
-        getContentPane().add(lblTempTank1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 250, 70, 50));
+        getContentPane().add(lblTempTank1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 250, 90, 50));
 
         jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Polygon 7.png"))); // NOI18N
         getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 320, 50, 60));
@@ -246,11 +246,11 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
 
         lblTempTank3.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
         lblTempTank3.setText("<html><center>39ºC<center></html>");
-        getContentPane().add(lblTempTank3, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 420, 70, 50));
+        getContentPane().add(lblTempTank3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 420, 90, 50));
 
         lblSetpointTank1.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
         lblSetpointTank1.setText("<html><center>39ºC<center></html>");
-        getContentPane().add(lblSetpointTank1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 300, 70, 50));
+        getContentPane().add(lblSetpointTank1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 300, 90, 50));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Wallpaper.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
@@ -268,6 +268,8 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
         }else{
             ledBomb.setIcon(ledOFF);
         }
+        
+        //JOptionPane.showMessageDialog(this, "ADICIONE O MALTE NA PANELA DE MOSTURAÇÃO!!", "ERRO", JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_btnBombActionPerformed
 
     private void btnEmergencyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmergencyActionPerformed
