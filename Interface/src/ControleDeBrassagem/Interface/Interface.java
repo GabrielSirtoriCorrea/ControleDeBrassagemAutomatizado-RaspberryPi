@@ -47,7 +47,6 @@ public class Interface extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -61,6 +60,7 @@ public class Interface extends javax.swing.JFrame {
         lblBomb = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         btnChangeMode = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
         btnEmergency = new javax.swing.JButton();
         jLabel21 = new javax.swing.JLabel();
         lblParameter2 = new javax.swing.JLabel();
@@ -103,10 +103,6 @@ public class Interface extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
         jLabel3.setText("EMERGÊNCIA");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, 230, 50));
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Ellipse 1.png"))); // NOI18N
-        jLabel2.setToolTipText("");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 210, 190));
 
         jLabel8.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
         jLabel8.setText("TANQUE 1");
@@ -174,6 +170,9 @@ public class Interface extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnChangeMode, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 150, 80));
+
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Ellipse 1.png"))); // NOI18N
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, -1, -1));
 
         btnEmergency.setText("Emergencia");
         btnEmergency.addActionListener(new java.awt.event.ActionListener() {
@@ -305,6 +304,7 @@ public class Interface extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEmergencyActionPerformed
 
     private void btnChangeModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeModeActionPerformed
+        new StatusController().resetStatus();
         new TelaBrassagemManual().setVisible(true);
         dispose();
     }//GEN-LAST:event_btnChangeModeActionPerformed
@@ -378,13 +378,13 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
