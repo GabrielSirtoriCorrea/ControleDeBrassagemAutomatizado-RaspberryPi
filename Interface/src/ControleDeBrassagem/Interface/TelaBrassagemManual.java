@@ -277,11 +277,14 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
         new StatusController().resetStatus();
         lblSetpointTank1.setText("0ºC");
         lblSetpointTank3.setText("0ºC");
-        
+        ledMotorTank1.setIcon(ledOFF);
+        ledMotorTank2.setIcon(ledOFF);
+        ledBomb.setIcon(ledOFF);
     }//GEN-LAST:event_btnEmergencyActionPerformed
 
     private void btnChangeModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeModeActionPerformed
         // TODO add your handling code here:
+        new StatusController().resetStatus();
         new Interface().setVisible(true);
         dispose();
     }//GEN-LAST:event_btnChangeModeActionPerformed
