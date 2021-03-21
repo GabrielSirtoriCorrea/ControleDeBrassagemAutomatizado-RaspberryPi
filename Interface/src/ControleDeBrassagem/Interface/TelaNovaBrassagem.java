@@ -31,7 +31,6 @@ public class TelaNovaBrassagem extends javax.swing.JFrame {
         this.setExtendedState(Interface.MAXIMIZED_BOTH); 
         this.setUndecorated(true);
         initComponents();
-        //JOptionPane.showMessageDialog(this, "ADICIONE O MALTE NA PANELA DE MOSTURAÇÃO!!!", "ATENÇÃO!!!", JOptionPane.WARNING_MESSAGE);
         config = 0;
         actualRamp = 1;
         actualHop = 1;
@@ -122,7 +121,7 @@ public class TelaNovaBrassagem extends javax.swing.JFrame {
 
         lblConfig.setFont(new java.awt.Font("Comic Sans MS", 1, 36)); // NOI18N
         lblConfig.setText("Temperatura inicial panela 1:");
-        getContentPane().add(lblConfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 600, 50));
+        getContentPane().add(lblConfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 600, 50));
 
         jLabel11.setFont(new java.awt.Font("Comic Sans MS", 1, 21)); // NOI18N
         jLabel11.setText("CANCELAR");
@@ -148,11 +147,11 @@ public class TelaNovaBrassagem extends javax.swing.JFrame {
 
         lblConfig1.setFont(new java.awt.Font("Comic Sans MS", 1, 36)); // NOI18N
         lblConfig1.setText("Temperatura inicial panela 1:");
-        getContentPane().add(lblConfig1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, 600, 50));
+        getContentPane().add(lblConfig1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 600, 50));
 
         lblTarget1.setFont(new java.awt.Font("Comic Sans MS", 1, 30)); // NOI18N
         lblTarget1.setText("39");
-        getContentPane().add(lblTarget1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 370, 40, 80));
+        getContentPane().add(lblTarget1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 370, 60, 80));
 
         lblUnidTarget1.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
         lblUnidTarget1.setText("min");
@@ -249,24 +248,34 @@ public class TelaNovaBrassagem extends javax.swing.JFrame {
             case 3:
                 status.writeStatus("Tank2", "ClarificationTime", Integer.parseInt(lblTarget.getText()));
                 setTargetsValues(0,0);
-                lblConfig.setText("Tempo de fervura:");
+                lblConfig.setText("Temperatura de fervura:");
+                lblUnidTarget.setText("ºC");
                 config++;
                 break;
-             case 4:
+            
+            case 4:
+                status.writeStatus("Tank3", "SetPoint", Integer.parseInt(lblTarget.getText()));
+                setTargetsValues(0,0);
+                lblConfig.setText("Tempo de fervura:");
+                lblUnidTarget.setText("min");
+                config++;
+                break;
+              
+             case 5:
                  status.writeStatus("Tank3", "BoilTime", Integer.parseInt(lblTarget.getText()));
                  setTargetsValues(0,0);
                  lblConfig.setText("Quantidade de Lúpulos: ");
                  lblUnidTarget.setVisible(false);
                   config++;
                 break;
-             case 5:
+             case 6:
                  hopsNumber = targetValue;
                  lblConfig.setText("Tempo do 1º Lúpulo:");
                  lblUnidTarget.setVisible(true);
                  setTargetsValues(0,0);
                 config++;
                 break;
-             case 6:
+             case 7:
                  allHopsArray.add(Integer.parseInt(lblTarget.getText()));
                  hopsNumber--;
                  actualHop++;
@@ -281,7 +290,7 @@ public class TelaNovaBrassagem extends javax.swing.JFrame {
                     dispose();
                  }
                 break;
-             case 7:
+             case 8:
                 break;
         }
         

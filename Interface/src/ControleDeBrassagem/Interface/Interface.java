@@ -7,6 +7,7 @@ package ControleDeBrassagem.Interface;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 /**
@@ -98,7 +99,7 @@ public class Interface extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
         jLabel7.setText("TANQUE 3");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 480, 130, 50));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 480, 130, 40));
 
         jLabel3.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
         jLabel3.setText("EMERGÊNCIA");
@@ -184,7 +185,7 @@ public class Interface extends javax.swing.JFrame {
 
         jLabel21.setFont(new java.awt.Font("Comic Sans MS", 1, 20)); // NOI18N
         jLabel21.setText("BRASSAGEM:");
-        getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 10, 140, 50));
+        getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 10, 160, 50));
 
         lblParameter2.setFont(new java.awt.Font("Comic Sans MS", 1, 21)); // NOI18N
         lblParameter2.setText("SetPoint:");
@@ -419,6 +420,26 @@ public class Interface extends javax.swing.JFrame {
         public void actionPerformed(ActionEvent e) {
            status = new StatusController();
            lblBomb.setText(booleanStatus(status.readStatus().getBoolean("Bomb")));
+           if(status.readStatus().getJSONObject("Tank1").getBoolean("MaltAlert")){
+               JOptionPane.showMessageDialog(null, "ADICIONE O MALTE NA PANELA DE MOSTURAÇÃO!!!", "ATENÇÃO!!!", JOptionPane.WARNING_MESSAGE);
+               status.writeStatus("Tank1", "MaltAlert", false);
+           }
+           if(status.readStatus().getJSONObject("Tank3").getBoolean("HopAlert")){
+               JOptionPane.showMessageDialog(null, "ADICIONE O LÚPULO NA PANELA DE FERVURA!!!", "ATENÇÃO!!!", JOptionPane.WARNING_MESSAGE);
+               status.writeStatus("Tank3", "HopAlert", false);
+           }
+           if(status.readStatus().getJSONObject("Tank1").getBoolean("NextProcess")){
+               JOptionPane.showMessageDialog(null, "ACIONE AS VÁVULAS PARA O PROCESSO DE CLARIFICAÇÃO!!!", "ATENÇÃO!!!", JOptionPane.WARNING_MESSAGE);
+               status.writeStatus("Tank1", "NextProcess", false);
+           }
+           if(status.readStatus().getJSONObject("Tank2").getBoolean("NextProcess")){
+               JOptionPane.showMessageDialog(null, "ACIONE AS VÁVULAS PARA O PROCESSO DE FERVURA!!!", "ATENÇÃO!!!", JOptionPane.WARNING_MESSAGE);
+               status.writeStatus("Tank2", "NextProcess", false);
+           }
+           if(status.readStatus().getJSONObject("Tank3").getBoolean("NextProcess")){
+               JOptionPane.showMessageDialog(null, "ACIONE AS VÁVULAS PARA O PROCESSO DE FERMENTAÇÃO!!!", "ATENÇÃO!!!", JOptionPane.WARNING_MESSAGE);
+               status.writeStatus("Tank3", "NextProcess", false);
+           }
             
             switch(tankControled){
                 case 1:

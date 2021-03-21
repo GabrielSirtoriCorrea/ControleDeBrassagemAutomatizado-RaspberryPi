@@ -45,6 +45,7 @@ Pega as informações no JSON, e as executa
 2 Threads:
 
 Thread 1:  Pega todas as variáveis atuais dos processos e as escreve no JSON
+                Executa todas as variaveis do JSON
 	
 Thread 2: Executa a lógica do projeto
 
