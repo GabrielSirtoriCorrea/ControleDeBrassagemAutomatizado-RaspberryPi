@@ -1,7 +1,10 @@
-import glob
+import glob, os
 
 class TemperatureSensors:
     def __init__(self):
+        os.system('modprobe w1-gpio')
+        os.system('modprobe w1-therm')
+
         self.SENSORS_BASE_DIR = '/sys/bus/w1/devices'
 
         self.DEVICE_1_FOLDER = glob.glob(self.SENSORS_BASE_DIR + '28*')[0]
@@ -12,23 +15,23 @@ class TemperatureSensors:
 
     def getTank1Sensor(self):
         try:
-            self.f = open(self.DEVICE_1_FILE, 'r')
-            self.lines = f.readlines()
-            self.f.close()
-            self.address, self.temp = lines[1].split('t=')
+            f = open(self.DEVICE_1_FILE, 'r')
+            lines = f.readlines()
+            f.close()
+            address, temp = lines[1].split('t=')
         except:
             pass
 
-        return self.temp/1000
+        return round(int(temp/1000),1)
 
     def getTank3Sensor(self):
         try:
-            self.f = open(self.DEVICE_2_FILE, 'r')
-            self.lines = f.readlines()
-            self.f.close()
-            self.address, self.temp = lines[1].split('t=')
+            f = open(self.DEVICE_2_FILE, 'r')
+            lines = f.readlines()
+            f.close()
+            address, temp = lines[1].split('t=')
         except:
             pass
 
-        return self.temp/1000
+        return round(int(temp/1000),1)
 
