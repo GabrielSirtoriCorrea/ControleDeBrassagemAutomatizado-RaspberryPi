@@ -1,7 +1,10 @@
 from threading import Thread
-import glob, TemperatureSensorsController, GPIOController, StatusController
+import glob
+from Scripts.TemperatureSensorsController import TemperatureSensors
+from Scripts import StatusController
+from Scripts.GPIOController import GPIOController
 
-temperatureSensors = TemperatureSensorsController.TemperatureSensors()
+temperatureSensors = TemperatureSensors()
 gpioController = GPIOController()
 
 def statusSync():   
