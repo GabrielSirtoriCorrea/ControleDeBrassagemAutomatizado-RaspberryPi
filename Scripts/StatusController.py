@@ -1,6 +1,6 @@
 import json
 
-path = './status.json'
+path = '../status.json'
 
 def readStatus():
     file = open(path, 'r')

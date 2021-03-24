@@ -1,21 +1,23 @@
 from threading import Thread
 import glob
-from Scripts.TemperatureSensorsController import TemperatureSensors
-from Scripts import StatusController
-from Scripts.GPIOController import GPIOController
+from TemperatureSensorsController import TemperatureSensors
+import StatusController
+from GPIOController import GPIOController
 
 temperatureSensors = TemperatureSensors()
 gpioController = GPIOController()
 
-def statusSync():   
-    StatusController.writeStatus('Tank1', 'Temperature', temperatureSensors.getTank1Sensor())
-    StatusController.writeStatus('Tank3', 'Temperature', temperatureSensors.getTank3Sensor())
+def statusSync():
+    while True:
+        StatusController.writeStatus('Tank1', 'Temperature', temperatureSensors.getTank1Sensor())
+        StatusController.writeStatus('Tank3', 'Temperature', temperatureSensors.getTank3Sensor())
 
-    gpioController.setBomb(StatusController.readStatus()['Bomb'])
-    gpioController.setMotor1(StatusController.readStatus()['Tank1']['Motor'])
-    gpioController.setMotor2(StatusController.readStatus()['Tank2']['Motor'])
-    gpioController.setResistence1(StatusController.readStatus()['Tank1']['Resistence'])
-    gpioController.setResistence2(StatusController.readStatus()['Tank3']['Resistence'])
+        gpioController.setBomb(StatusController.readStatus()['Bomb'])
+        gpioController.setMotor1(StatusController.readStatus()['Tank1']['Motor'])
+        gpioController.setMotor2(StatusController.readStatus()['Tank2']['Motor'])
+        gpioController.setResistence1(StatusController.readStatus()['Tank1']['Resistence'])
+        gpioController.setResistence2(StatusController.readStatus()['Tank3']['Resistence'])
+        print(temperatureSensors.getTank1Sensor())
 
 Thread(target=statusSync).start()
 
