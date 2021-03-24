@@ -5,7 +5,7 @@ class TemperatureSensors:
         os.system('modprobe w1-gpio')
         os.system('modprobe w1-therm')
 
-        self.SENSORS_BASE_DIR = '/sys/bus/w1/devices'
+        self.SENSORS_BASE_DIR = '/sys/bus/w1/devices/'
 
         self.DEVICE_1_FOLDER = glob.glob(self.SENSORS_BASE_DIR + '28*')[0]
         self.DEVICE_1_FILE = self.DEVICE_1_FOLDER + '/w1_slave'
@@ -22,7 +22,7 @@ class TemperatureSensors:
         except:
             pass
 
-        return round(int(temp/1000),1)
+        return round(int(temp)/1000,1)
 
     def getTank3Sensor(self):
         try:
@@ -33,5 +33,5 @@ class TemperatureSensors:
         except:
             pass
 
-        return round(int(temp/1000),1)
+        return round(int(temp)/1000,1)
 
