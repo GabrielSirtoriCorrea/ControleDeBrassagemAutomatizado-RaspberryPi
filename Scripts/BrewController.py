@@ -1,11 +1,13 @@
 from threading import Thread
-import glob
+import glob, os
 from TemperatureSensorsController import TemperatureSensors
 import StatusController
 from GPIOController import GPIOController
 
 temperatureSensors = TemperatureSensors()
 gpioController = GPIOController()
+
+os.system('java -jar ../Interface/dist/Interface.jar')
 
 def statusSync():
     while True:

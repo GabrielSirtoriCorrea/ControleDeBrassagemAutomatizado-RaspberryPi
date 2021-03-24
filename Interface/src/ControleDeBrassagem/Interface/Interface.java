@@ -7,9 +7,6 @@ package ControleDeBrassagem.Interface;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
@@ -25,22 +22,17 @@ public class Interface extends javax.swing.JFrame {
      * Creates new form Interface
      */
     public Interface() {
-        try {
-            Runtime.getRuntime().exec("lxTerminal.desktop /c start ../Scripts/BrewController.py");       
-            this.setExtendedState(Interface.MAXIMIZED_BOTH); 
-            this.setUndecorated(true);
-            toFront();
-            initComponents();
-            brewStarted  = false;
-            status = new StatusController();
-            status.writeStatus(null, "BrewMode", "Automatic");
-            System.out.println(status.readStatus().get("BrewMode"));
-            status.writeStatus(null, "BrewStatus", "Pausado");
-            Timer timer = new Timer(1000, new TankController());
-            timer.start();
-        } catch (IOException ex) {
-            Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        this.setExtendedState(Interface.MAXIMIZED_BOTH); 
+        this.setUndecorated(true);
+        toFront();
+        initComponents();
+        brewStarted  = false;
+        status = new StatusController();
+        status.writeStatus(null, "BrewMode", "Automatic");
+        System.out.println(status.readStatus().get("BrewMode"));
+        status.writeStatus(null, "BrewStatus", "Pausado");
+        Timer timer = new Timer(1000, new TankController());
+        timer.start();
     }
 
     /**
