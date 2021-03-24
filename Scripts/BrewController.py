@@ -7,7 +7,8 @@ from GPIOController import GPIOController
 temperatureSensors = TemperatureSensors()
 gpioController = GPIOController()
 
-os.system('java -jar ../Interface/dist/Interface.jar')
+def startInterface():
+    os.system('java -jar ../Interface/dist/Interface.jar')
 
 def statusSync():
     while True:
@@ -22,6 +23,7 @@ def statusSync():
         print(temperatureSensors.getTank1Sensor())
 
 Thread(target=statusSync).start()
+Thread(target=startInterface).start()
 
 '''def abc():
     while True:
