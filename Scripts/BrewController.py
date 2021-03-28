@@ -13,102 +13,113 @@ def startInterface():
 
 def statusSync():
     while True:
-        StatusController.writeStatus('Tank1', 'Temperature', temperatureSensors.getTank1Sensor())
-        StatusController.writeStatus('Tank3', 'Temperature', temperatureSensors.getTank3Sensor())
+        try:
+            StatusController.writeStatus('Tank1', 'Temperature', temperatureSensors.getTank1Sensor())
+            StatusController.writeStatus('Tank3', 'Temperature', temperatureSensors.getTank3Sensor())
 
-        gpioController.setBomb(StatusController.readStatus()['Bomb'])
-        gpioController.setMotor1(StatusController.readStatus()['Tank1']['Motor'])
-        gpioController.setMotor2(StatusController.readStatus()['Tank2']['Motor'])
-        gpioController.setResistence1(StatusController.readStatus()['Tank1']['Resistence'])
-        gpioController.setResistence2(StatusController.readStatus()['Tank3']['Resistence'])
-        print(temperatureSensors.getTank1Sensor())
+            gpioController.setBomb(StatusController.readStatus()['Bomb'])
+            gpioController.setMotor1(StatusController.readStatus()['Tank1']['Motor'])
+            gpioController.setMotor2(StatusController.readStatus()['Tank2']['Motor'])
+            gpioController.setResistence1(StatusController.readStatus()['Tank1']['Resistence'])
+            gpioController.setResistence2(StatusController.readStatus()['Tank3']['Resistence'])
+            print(temperatureSensors.getTank1Sensor())
+        except:
+            pass
 
 def brew():
-    status =  StatusController.readStatus()
-    if status['BrewStatus'] ==  'Em andamento' and status['BrewMode'] == 'Automatic':
-        StatusController.writeStatus('Tank1', 'Motor', True)
-        print('Motor 1 ligado')
-        temperature  =  status['Tank1']['Temperature']
-        setPoint = status['Tank1']['setPoint']
+    while True:
+        try:
+            sleep(1)
+            print('Lendo Status')
+            status =  StatusController.readStatus()
+            if status['BrewStatus'] ==  'Em andamento' and status['BrewMode'] == 'Automatic':
+                StatusController.writeStatus('Tank1', 'Motor', True)
+                print('Motor 1 ligado')
+                temperature  =  status['Tank1']['Temperature']
+                setPoint = status['Tank1']['setPoint']
 
-        while temperature < setPoint:
-            if setPoint - 3 <=  temperature:
-                StatusController.writeStatus('Tank1', 'Resistence', True)
-                sleep(15)
-                StatusController.writeStatus('Tank1', 'Resistence', False)
-                sleep(15)
-            else:
-                StatusController.writeStatus('Tank1', 'Resistence', True)
-
-            temperature  =  StatusController.readStatus()['Tank1']['Temperature']
-            
-        StatusController.writeStatus('Tank1', 'Resistence', False)
-        StatusController.writeStatus('Tank1', 'MaltAlert', True)
-        print('Adicionar malte')
-        sleep(15)
-
-        actualRamp = 1
-        for malt in status['Tank1', 'Ramps']:
-            print('Rampa ' + actualRamp)
-            StatusController.writeStatus('Tank1', 'ActualRamp', actualRamp)
-            StatusController.writeStatus('Tank1', 'setPoint', malt[0])
-            temperature  =  StatusController.readStatus()['Tank1']['Temperature']
-            setPoint = malt[0]
-            endTime = time() + malt[1]*60
-
-            while time() < endTime:
-                if temperature < setPoint:
+                while temperature < setPoint:
+                    print('Setpoint')
                     if setPoint - 3 <=  temperature:
                         StatusController.writeStatus('Tank1', 'Resistence', True)
-                        sleep(15)
+                        sleep(3)
                         StatusController.writeStatus('Tank1', 'Resistence', False)
-                        sleep(15)
+                        sleep(3)
                     else:
                         StatusController.writeStatus('Tank1', 'Resistence', True)
-                else:
-                    StatusController.writeStatus('Tank1', 'Resistence', False)
 
                     temperature  =  StatusController.readStatus()['Tank1']['Temperature']
+                    
+                StatusController.writeStatus('Tank1', 'Resistence', False)
+                StatusController.writeStatus('Tank1', 'MaltAlert', True)
+                print('Adicionar malte')
+                sleep(3)
 
-            actualRamp+=1
+                actualRamp = 1
+                for malt in StatusController.readStatus['Tank1']['Ramps']:
+                    print('Rampa ', actualRamp)
+                    StatusController.writeStatus('Tank1', 'ActualRamp', actualRamp)
+                    StatusController.writeStatus('Tank1', 'setPoint', malt[0])
+                    temperature  =  StatusController.readStatus()['Tank1']['Temperature']
+                    setPoint = malt[0]
+                    endTime = time() + malt[1]*60
 
-        StatusController.writeStatus('Tank1', 'NextProcess', True)
-        StatusController.writeStatus(None, 'Bomb', True)
-        print('Bomba Ligada')
-        print('Proximo processo')
-        sleep(15)
+                    while time() < endTime:
+                        if temperature < setPoint:
+                            if setPoint - 3 <=  temperature:
+                                StatusController.writeStatus('Tank1', 'Resistence', True)
+                                sleep(3)
+                                StatusController.writeStatus('Tank1', 'Resistence', False)
+                                sleep(3)
+                            else:
+                                StatusController.writeStatus('Tank1', 'Resistence', True)
+                        else:
+                            StatusController.writeStatus('Tank1', 'Resistence', False)
 
-        StatusController.writeStatus('Tank2', 'Motor', True)
-        print('Motor 2 ligado, Clarificação')
-        sleep(StatusController.readStatus()['Tank2']['ClarificationTime'])
-        StatusController.writeStatus('Tank2', 'NextProcess', True)
-        print('Proximo processo')
-        sleep(15)
+                            temperature  =  StatusController.readStatus()['Tank1']['Temperature']
 
-        status = StatusController.readStatus()
+                    actualRamp+=1
 
-        temperature  =  status['Tank3']['Temperature']
-        setPoint = status['Tank3']['setPoint']
-        boilTime = time() + status['Tank3']['BoilTime']
-        clock = time()
+                StatusController.writeStatus('Tank1', 'NextProcess', True)
+                StatusController.writeStatus(None, 'Bomb', True)
+                print('Bomba Ligada')
+                print('Proximo processo')
+                sleep(3)
 
-        while clock < boilTime:
-            for hopTime in status['Tank3']['Hops']:
-                if temperature < setPoint:
-                    StatusController.writeStatus('Tank3', 'Resistence', True)
-                else:
-                    StatusController.writeStatus('Tank3', 'Resistence', False)
+                StatusController.writeStatus('Tank2', 'Motor', True)
+                print('Motor 2 ligado, Clarificação')
+                sleep(StatusController.readStatus()['Tank2']['ClarificationTime']*60)
+                StatusController.writeStatus('Tank2', 'NextProcess', True)
+                print('Proximo processo')
+                sleep(3)
 
-                if clock >= boilTime - hopTime:
-                    print('Adicionar Lupulo')
-                    StatusController.writeStatus('Tank3', 'HopAlert', True)
+                status = StatusController.readStatus()
 
-                temperature  =  StatusController.readStatus()['Tank3']['Temperature']
+                temperature  =  status['Tank3']['Temperature']
+                setPoint = status['Tank3']['setPoint']
+                boilTime = time() + (status['Tank3']['BoilTime']*60)
+                clock = time()
+
+                while clock < boilTime:
+                    for hopTime in status['Tank3']['Hops']:
+                        if temperature < setPoint:
+                            StatusController.writeStatus('Tank3', 'Resistence', True)
+                        else:
+                            StatusController.writeStatus('Tank3', 'Resistence', False)
+
+                        if clock >= boilTime - (hopTime*60):
+                            print('Adicionar Lupulo')
+                            StatusController.writeStatus('Tank3', 'HopAlert', True)
+
+                        temperature  =  StatusController.readStatus()['Tank3']['Temperature']
+                
+                StatusController.writeStatus('Tank3', 'NextProcess', True)
+                print('Proximo processo')
+                StatusController.writeStatus(None, 'BrewStatus', True)
+                sleep(15)
         
-        StatusController.writeStatus('Tank3', 'NextProcess', True)
-        print('Proximo processo')
-        StatusController.writeStatus(None, 'BrewStatus', True)
-        sleep(15)
+        except:
+            pass
 
 
 Thread(target=statusSync).start()
