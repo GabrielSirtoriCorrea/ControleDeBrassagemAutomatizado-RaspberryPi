@@ -27,6 +27,7 @@ def brew():
     status =  StatusController.readStatus()
     if status['BrewStatus'] ==  'Em andamento' and status['BrewMode'] == 'Automatic':
         StatusController.writeStatus('Tank1', 'Motor', True)
+        print('Motor 1 ligado')
         temperature  =  status['Tank1']['Temperature']
         setPoint = status['Tank1']['setPoint']
 
@@ -43,10 +44,12 @@ def brew():
             
         StatusController.writeStatus('Tank1', 'Resistence', False)
         StatusController.writeStatus('Tank1', 'MaltAlert', True)
+        print('Adicionar malte')
         sleep(15)
 
         actualRamp = 1
         for malt in status['Tank1', 'Ramps']:
+            print('Rampa ' + actualRamp)
             StatusController.writeStatus('Tank1', 'ActualRamp', actualRamp)
             StatusController.writeStatus('Tank1', 'setPoint', malt[0])
             temperature  =  StatusController.readStatus()['Tank1']['Temperature']
@@ -70,12 +73,16 @@ def brew():
             actualRamp+=1
 
         StatusController.writeStatus('Tank1', 'NextProcess', True)
-        StatusController.writeStatus('Tank1', 'Bomb', True)
+        StatusController.writeStatus(None, 'Bomb', True)
+        print('Bomba Ligada')
+        print('Proximo processo')
         sleep(15)
 
         StatusController.writeStatus('Tank2', 'Motor', True)
+        print('Motor 2 ligado, Clarificação')
         sleep(StatusController.readStatus()['Tank2']['ClarificationTime'])
         StatusController.writeStatus('Tank2', 'NextProcess', True)
+        print('Proximo processo')
         sleep(15)
 
         status = StatusController.readStatus()
@@ -83,17 +90,26 @@ def brew():
         temperature  =  status['Tank3']['Temperature']
         setPoint = status['Tank3']['setPoint']
         boilTime = time() + status['Tank3']['BoilTime']
+        clock = time()
 
-        while time() < boilTime:
+        while clock < boilTime:
             for hopTime in status['Tank3']['Hops']:
                 if temperature < setPoint:
                     StatusController.writeStatus('Tank3', 'Resistence', True)
                 else:
                     StatusController.writeStatus('Tank3', 'Resistence', False)
 
-                
+                if clock >= boilTime - hopTime:
+                    print('Adicionar Lupulo')
+                    StatusController.writeStatus('Tank3', 'HopAlert', True)
 
                 temperature  =  StatusController.readStatus()['Tank3']['Temperature']
+        
+        StatusController.writeStatus('Tank3', 'NextProcess', True)
+        print('Proximo processo')
+        StatusController.writeStatus(None, 'BrewStatus', True)
+        sleep(15)
+
 
 Thread(target=statusSync).start()
 Thread(target=startInterface).start()
