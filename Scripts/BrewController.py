@@ -36,7 +36,7 @@ def brew():
                 StatusController.writeStatus('Tank1', 'Motor', True)
                 print('Motor 1 ligado')
                 temperature  =  status['Tank1']['Temperature']
-                setPoint = status['Tank1']['setPoint']
+                setPoint = status['Tank1']['SetPoint']
 
                 while temperature < setPoint:
                     print('Setpoint')
@@ -56,10 +56,10 @@ def brew():
                 sleep(3)
 
                 actualRamp = 1
-                for malt in StatusController.readStatus['Tank1']['Ramps']:
+                for malt in StatusController.readStatus()['Tank1']['Ramps']:
                     print('Rampa ', actualRamp)
                     StatusController.writeStatus('Tank1', 'ActualRamp', actualRamp)
-                    StatusController.writeStatus('Tank1', 'setPoint', malt[0])
+                    StatusController.writeStatus('Tank1', 'SetPoint', malt[0])
                     temperature  =  StatusController.readStatus()['Tank1']['Temperature']
                     setPoint = malt[0]
                     endTime = time() + malt[1]*60
@@ -94,9 +94,9 @@ def brew():
                 sleep(3)
 
                 status = StatusController.readStatus()
-
+                print('status atual: ', status)
                 temperature  =  status['Tank3']['Temperature']
-                setPoint = status['Tank3']['setPoint']
+                setPoint = status['Tank3']['SetPoint']
                 boilTime = time() + (status['Tank3']['BoilTime']*60)
                 clock = time()
 
