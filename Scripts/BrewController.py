@@ -84,14 +84,16 @@ def brew():
                 StatusController.writeStatus(None, 'Bomb', True)
                 print('Bomba Ligada')
                 print('Proximo processo')
-                sleep(3)
+                sleep(0.5)
+                StatusController.writeStatus('Tank1', 'NextProcess', False)
 
                 StatusController.writeStatus('Tank2', 'Motor', True)
                 print('Motor 2 ligado, Clarificação')
                 sleep(StatusController.readStatus()['Tank2']['ClarificationTime']*60)
                 StatusController.writeStatus('Tank2', 'NextProcess', True)
                 print('Proximo processo')
-                sleep(3)
+                sleep(0.5)
+                StatusController.writeStatus('Tank2', 'NextProcess', False)
 
                 status = StatusController.readStatus()
                 print('status atual: ', status)
@@ -99,8 +101,23 @@ def brew():
                 setPoint = status['Tank3']['SetPoint']
                 boilTime = time() + (status['Tank3']['BoilTime']*60)
                 clock = time()
+                hops = status['Tank3']['Hops']
 
-                while clock < boilTime:
+                for hopTime in status['Tank3']['Hops']:
+                    while True:
+                        if temperature < setPoint:
+                            StatusController.writeStatus('Tank3', 'Resistence', True)
+                        else:
+                            StatusController.writeStatus('Tank3', 'Resistence', False)
+
+                        if clock >= boilTime - (hopTime*60):
+                            print('Adicionar Lupulo')
+                            StatusController.writeStatus('Tank3', 'HopAlert', True)
+                            break
+
+                        temperature  =  StatusController.readStatus()['Tank3']['Temperature']
+
+                '''while clock < boilTime:
                     for hopTime in status['Tank3']['Hops']:
                         if temperature < setPoint:
                             StatusController.writeStatus('Tank3', 'Resistence', True)
@@ -111,11 +128,13 @@ def brew():
                             print('Adicionar Lupulo')
                             StatusController.writeStatus('Tank3', 'HopAlert', True)
 
-                        temperature  =  StatusController.readStatus()['Tank3']['Temperature']
+                        temperature  =  StatusController.readStatus()['Tank3']['Temperature']'''
                 
                 StatusController.writeStatus('Tank3', 'NextProcess', True)
                 print('Proximo processo')
                 StatusController.writeStatus(None, 'BrewStatus', True)
+                sleep(0.5)
+                StatusController.writeStatus('Tank3', 'NextProcess', False)
                 sleep(15)
         
         except:
