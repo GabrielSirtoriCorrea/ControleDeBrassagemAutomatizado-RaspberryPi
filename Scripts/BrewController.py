@@ -29,7 +29,6 @@ def statusSync():
 def brew():
     while True:
         try:
-            sleep(1)
             print('Lendo Status')
             status =  StatusController.readStatus()
             if status['BrewStatus'] ==  'Em andamento' and status['BrewMode'] == 'Automatic':
@@ -80,11 +79,12 @@ def brew():
 
                     actualRamp+=1
 
+                StatusController.writeStatus('Tank1', 'Motor', False)
                 StatusController.writeStatus('Tank1', 'NextProcess', True)
                 StatusController.writeStatus(None, 'Bomb', True)
                 print('Bomba Ligada')
                 print('Proximo processo')
-                sleep(0.4)
+                sleep(0.35)
                 StatusController.writeStatus('Tank1', 'NextProcess', False)
 
                 StatusController.writeStatus('Tank2', 'Motor', True)
@@ -92,7 +92,7 @@ def brew():
                 sleep(StatusController.readStatus()['Tank2']['ClarificationTime']*60)
                 StatusController.writeStatus('Tank2', 'NextProcess', True)
                 print('Proximo processo')
-                sleep(0.4)
+                sleep(0.5)
                 StatusController.writeStatus('Tank2', 'NextProcess', False)
 
                 status = StatusController.readStatus()
@@ -104,12 +104,14 @@ def brew():
 
                 for hopTime in status['Tank3']['Hops']:
                     while True:
-                        if clock >= boilTime - (hopTime*60):
+                        print(boilTime)
+                        print(hopTime)
+                        if time() >= boilTime - (hopTime*60):
                             print('Adicionar Lupulo')
                             StatusController.writeStatus('Tank3', 'HopAlert', True)
                             break
 
-                        temperature  =  StatusController.readStatus()['Tank3']['Temperature']
+                        #temperature = StatusController.readStatus()['Tank3']['Temperature']
 
                 '''while clock < boilTime:
                     for hopTime in status['Tank3']['Hops']:
