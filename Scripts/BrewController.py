@@ -84,7 +84,7 @@ def brew():
                 StatusController.writeStatus(None, 'Bomb', True)
                 print('Bomba Ligada')
                 print('Proximo processo')
-                sleep(0.5)
+                sleep(0.4)
                 StatusController.writeStatus('Tank1', 'NextProcess', False)
 
                 StatusController.writeStatus('Tank2', 'Motor', True)
@@ -92,7 +92,7 @@ def brew():
                 sleep(StatusController.readStatus()['Tank2']['ClarificationTime']*60)
                 StatusController.writeStatus('Tank2', 'NextProcess', True)
                 print('Proximo processo')
-                sleep(0.5)
+                sleep(0.4)
                 StatusController.writeStatus('Tank2', 'NextProcess', False)
 
                 status = StatusController.readStatus()
@@ -101,15 +101,9 @@ def brew():
                 setPoint = status['Tank3']['SetPoint']
                 boilTime = time() + (status['Tank3']['BoilTime']*60)
                 clock = time()
-                hops = status['Tank3']['Hops']
 
                 for hopTime in status['Tank3']['Hops']:
                     while True:
-                        if temperature < setPoint:
-                            StatusController.writeStatus('Tank3', 'Resistence', True)
-                        else:
-                            StatusController.writeStatus('Tank3', 'Resistence', False)
-
                         if clock >= boilTime - (hopTime*60):
                             print('Adicionar Lupulo')
                             StatusController.writeStatus('Tank3', 'HopAlert', True)
@@ -140,7 +134,7 @@ def brew():
         except:
             pass
 
-
+StatusController.resetStatus()
 Thread(target=statusSync).start()
 Thread(target=startInterface).start()
 Thread(target=brew).start()
