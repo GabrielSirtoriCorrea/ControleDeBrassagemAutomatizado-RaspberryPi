@@ -12,10 +12,18 @@ def startInterface():
     os.system('java -jar ../Interface/dist/Interface.jar')
 
 def statusSync():
+    tempTank1, tempTank3, lastTempTank1, lastTempTank3 = (0,0,0,0)
     while True:
         try:
-            StatusController.writeStatus('Tank1', 'Temperature', temperatureSensors.getTank1Sensor())
-            StatusController.writeStatus('Tank3', 'Temperature', temperatureSensors.getTank3Sensor())
+            tempTank1 = temperatureSensors.getTank1Sensor()
+            if tempTank1 != lastTempTank1:
+                StatusController.writeStatus('Tank1', 'Temperature', temperatureSensors.getTank1Sensor())
+            
+            if tempTank3 != lastTempTank3:
+                StatusController.writeStatus('Tank3', 'Temperature', temperatureSensors.getTank3Sensor())
+
+            lastTempTank1 = tempTank1
+            lastTempTank3 = tempTank3
 
             gpioController.setBomb(StatusController.readStatus()['Bomb'])
             gpioController.setMotor1(StatusController.readStatus()['Tank1']['Motor'])
