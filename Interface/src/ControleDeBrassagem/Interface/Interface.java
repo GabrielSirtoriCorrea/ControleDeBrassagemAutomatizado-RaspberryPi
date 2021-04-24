@@ -422,24 +422,18 @@ public class Interface extends javax.swing.JFrame {
            lblBomb.setText(booleanStatus(status.readStatus().getBoolean("Bomb")));
            if(status.readStatus().getJSONObject("Tank1").getBoolean("MaltAlert")){
                JOptionPane.showMessageDialog(null, "ADICIONE O MALTE NA PANELA DE MOSTURAÇÃO!!!", "ATENÇÃO!!!", JOptionPane.WARNING_MESSAGE);
-                }else{
-               if(status.readStatus().getJSONObject("Tank3").getBoolean("HopAlert")){
-                    JOptionPane.showMessageDialog(null, "ADICIONE O LÚPULO NA PANELA DE FERVURA!!!", "ATENÇÃO!!!", JOptionPane.WARNING_MESSAGE);
-               }else{
-                   if(status.readStatus().getJSONObject("Tank1").getBoolean("NextProcess")){
-                        JOptionPane.showMessageDialog(null, "ACIONE AS VÁVULAS PARA O PROCESSO DE CLARIFICAÇÃO!!!", "ATENÇÃO!!!", JOptionPane.WARNING_MESSAGE);
-                         }else{
-                               if(status.readStatus().getJSONObject("Tank2").getBoolean("NextProcess")){
-                                    JOptionPane.showMessageDialog(null, "ACIONE AS VÁVULAS PARA O PROCESSO DE FERVURA!!!", "ATENÇÃO!!!", JOptionPane.WARNING_MESSAGE);
-                                }else{
-                                    if(status.readStatus().getJSONObject("Tank3").getBoolean("NextProcess")){
-                                         JOptionPane.showMessageDialog(null, "ACIONE AS VÁVULAS PARA O PROCESSO DE FERMENTAÇÃO!!!", "ATENÇÃO!!!", JOptionPane.WARNING_MESSAGE);
-                                }   
-                         }            
-                   }
-                   
-               }
-               
+           }
+           if(status.readStatus().getJSONObject("Tank3").getBoolean("HopAlert")){
+               JOptionPane.showMessageDialog(null, "ADICIONE O LÚPULO NA PANELA DE FERVURA!!!", "ATENÇÃO!!!", JOptionPane.WARNING_MESSAGE);
+           }
+           if(status.readStatus().getJSONObject("Tank1").getBoolean("NextProcess")){
+               JOptionPane.showMessageDialog(null, "ACIONE AS VÁVULAS PARA O PROCESSO DE CLARIFICAÇÃO!!!", "ATENÇÃO!!!", JOptionPane.WARNING_MESSAGE);
+           }
+           if(status.readStatus().getJSONObject("Tank2").getBoolean("NextProcess")){
+               JOptionPane.showMessageDialog(null, "ACIONE AS VÁVULAS PARA O PROCESSO DE FERVURA!!!", "ATENÇÃO!!!", JOptionPane.WARNING_MESSAGE);
+           }
+           if(status.readStatus().getJSONObject("Tank3").getBoolean("NextProcess")){
+               JOptionPane.showMessageDialog(null, "ACIONE AS VÁVULAS PARA O PROCESSO DE FERMENTAÇÃO!!!", "ATENÇÃO!!!", JOptionPane.WARNING_MESSAGE);
            }
             
             switch(tankControled){

@@ -15,7 +15,8 @@ def statusSync():
     tempTank1, tempTank3, lastTempTank1, lastTempTank3 = (0,0,0,0)
     while True:
         try:
-            tempTank1 = temperatureSensors.getTank1Sensor()
+            tempTank1 = int(temperatureSensors.getTank1Sensor())
+            tempTank3 = int(temperatureSensors.getTank3Sensor())
             if tempTank1 != lastTempTank1:
                 StatusController.writeStatus('Tank1', 'Temperature', temperatureSensors.getTank1Sensor())
             
@@ -48,20 +49,24 @@ def brew():
                 while temperature +1 < setPoint:
                     print('Setpoint')
                     StatusController.writeStatus('Tank1', 'Resistence', True)
+                    sleep(0.5)
                     temperature  =  StatusController.readStatus()['Tank1']['Temperature']
                     
                 StatusController.writeStatus('Tank1', 'Resistence', False)
+                sleep(0.5)
                 StatusController.writeStatus('Tank1', 'MaltAlert', True)
                 print('Adicionar malte')
                 sleep(0.5)
                 StatusController.writeStatus('Tank1', 'MaltAlert', False)
-                sleep(15)
+                sleep(0.5)
 
                 actualRamp = 1
                 for malt in status['Tank1']['Ramps']:
                     print('Rampa ', actualRamp)
                     StatusController.writeStatus('Tank1', 'ActualRamp', actualRamp)
+                    sleep(0.5)
                     StatusController.writeStatus('Tank1', 'SetPoint', malt[0])
+                    sleep(0.5)
                     temperature  =  StatusController.readStatus()['Tank1']['Temperature']
                     setPoint = malt[0]
                     endTime = time() + malt[1]*60
