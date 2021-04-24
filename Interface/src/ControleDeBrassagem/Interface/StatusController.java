@@ -26,13 +26,15 @@ public class StatusController {
     private static FileWriter writer;
    
     public static JSONObject readStatus(){
-        try {
-            jsonParser = new JSONParser();
-            jsonObject = new JSONObject(jsonParser.parse(new FileReader("../status.json")).toString());
-        } catch (ParseException | IOException | NullPointerException e) {
-            e.printStackTrace();
-        }
-        
+        do{
+            try {
+                jsonParser = new JSONParser();
+                jsonObject = new JSONObject(jsonParser.parse(new FileReader("../status.json")).toString());
+            } catch (ParseException | IOException | NullPointerException e) {
+                e.printStackTrace();
+            }
+        }while(jsonObject.isEmpty());
+            
         return jsonObject;
     }
     
