@@ -7,6 +7,8 @@ package ControleDeBrassagem.Interface;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
@@ -418,71 +420,78 @@ public class Interface extends javax.swing.JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-           status = new StatusController();
-           lblBomb.setText(booleanStatus(status.readStatus().getBoolean("Bomb")));
-           if(status.readStatus().getJSONObject("Tank1").getBoolean("MaltAlert")){
-               JOptionPane.showMessageDialog(null, "ADICIONE O MALTE NA PANELA DE MOSTURAÇÃO!!!", "ATENÇÃO!!!", JOptionPane.WARNING_MESSAGE);
-           }
-           if(status.readStatus().getJSONObject("Tank3").getBoolean("HopAlert")){
-               JOptionPane.showMessageDialog(null, "ADICIONE O LÚPULO NA PANELA DE FERVURA!!!", "ATENÇÃO!!!", JOptionPane.WARNING_MESSAGE);
-           }
-           if(status.readStatus().getJSONObject("Tank1").getBoolean("NextProcess")){
-               JOptionPane.showMessageDialog(null, "ACIONE AS VÁVULAS PARA O PROCESSO DE CLARIFICAÇÃO!!!", "ATENÇÃO!!!", JOptionPane.WARNING_MESSAGE);
-           }
-           if(status.readStatus().getJSONObject("Tank2").getBoolean("NextProcess")){
-               JOptionPane.showMessageDialog(null, "ACIONE AS VÁVULAS PARA O PROCESSO DE FERVURA!!!", "ATENÇÃO!!!", JOptionPane.WARNING_MESSAGE);
-           }
-           if(status.readStatus().getJSONObject("Tank3").getBoolean("NextProcess")){
-               JOptionPane.showMessageDialog(null, "ACIONE AS VÁVULAS PARA O PROCESSO DE FERMENTAÇÃO!!!", "ATENÇÃO!!!", JOptionPane.WARNING_MESSAGE);
-           }
-            
-            switch(tankControled){
-                case 1:
-                    lblTankNumber.setText("Tanque 1");
-                    
-                    lblParameter1.setText("Temperatura:");
-                    lblParameter2.setText("SetPoint:");
-                    lblParameter3.setText("Resistência:");
-                    lblParameter4.setText("Motor:");
-                    lblParameter5.setText("Rampa atual:");
-                    
-                    lblResult1.setText(Integer.toString(status.readStatus().getJSONObject("Tank1").getInt("Temperature")) + "ºC");
-                    lblResult2.setText(Integer.toString(status.readStatus().getJSONObject("Tank1").getInt("SetPoint")) + "ºC");
-                    lblResult3.setText(booleanStatus(status.readStatus().getJSONObject("Tank1").getBoolean("Resistence")));
-                    lblResult4.setText(booleanStatus(status.readStatus().getJSONObject("Tank1").getBoolean("Motor")));
-                    lblResult5.setText(Integer.toString(status.readStatus().getJSONObject("Tank1").getInt("ActualRamp")));
-                    break;
-                case 2:
-                    lblTankNumber.setText("Tanque 2");
-                    
-                    lblParameter1.setText("Motor:");
-                    lblParameter2.setText("");
-                    lblParameter3.setText("");
-                    lblParameter4.setText("");
-                    lblParameter5.setText("");
-                    
-                    lblResult1.setText(booleanStatus(status.readStatus().getJSONObject("Tank2").getBoolean("Motor")));
-                    lblResult2.setText("");
-                    lblResult3.setText("");
-                    lblResult4.setText("");
-                    lblResult5.setText("");
-                    break;
-                case 3:
-                    lblTankNumber.setText("Tanque 3");
-                    
-                    lblParameter1.setText("Temperatura:");
-                    lblParameter2.setText("SetPoint");
-                    lblParameter3.setText("Resistência:");
-                    lblParameter4.setText("");
-                    lblParameter5.setText("");
-                    lblResult1.setText(Integer.toString(status.readStatus().getJSONObject("Tank3").getInt("Temperature")) + "ºC");
-                    lblResult2.setText(Integer.toString(status.readStatus().getJSONObject("Tank3").getInt("SetPoint")) + "ºC");
-                    lblResult3.setText(booleanStatus(status.readStatus().getJSONObject("Tank3").getBoolean("Resistence")));
-                    lblResult4.setText("");
-                    lblResult5.setText("");
-                    break;
+            try {
+                Thread.currentThread().sleep(1000);
+                status = new StatusController();
+                lblBomb.setText(booleanStatus(status.readStatus().getBoolean("Bomb")));
+                if(status.readStatus().getJSONObject("Tank1").getBoolean("MaltAlert")){
+                    JOptionPane.showMessageDialog(null, "ADICIONE O MALTE NA PANELA DE MOSTURAÇÃO!!!", "ATENÇÃO!!!", JOptionPane.WARNING_MESSAGE);
+                }
+                if(status.readStatus().getJSONObject("Tank3").getBoolean("HopAlert")){
+                    JOptionPane.showMessageDialog(null, "ADICIONE O LÚPULO NA PANELA DE FERVURA!!!", "ATENÇÃO!!!", JOptionPane.WARNING_MESSAGE);
+                }
+                if(status.readStatus().getJSONObject("Tank1").getBoolean("NextProcess")){
+                    JOptionPane.showMessageDialog(null, "ACIONE AS VÁVULAS PARA O PROCESSO DE CLARIFICAÇÃO!!!", "ATENÇÃO!!!", JOptionPane.WARNING_MESSAGE);
+                }
+                if(status.readStatus().getJSONObject("Tank2").getBoolean("NextProcess")){
+                    JOptionPane.showMessageDialog(null, "ACIONE AS VÁVULAS PARA O PROCESSO DE FERVURA!!!", "ATENÇÃO!!!", JOptionPane.WARNING_MESSAGE);
+                }
+                if(status.readStatus().getJSONObject("Tank3").getBoolean("NextProcess")){
+                    JOptionPane.showMessageDialog(null, "ACIONE AS VÁVULAS PARA O PROCESSO DE FERMENTAÇÃO!!!", "ATENÇÃO!!!", JOptionPane.WARNING_MESSAGE);
+                }
+
+              switch(tankControled){
+                 case 1:
+                     lblTankNumber.setText("Tanque 1");
+
+                     lblParameter1.setText("Temperatura:");
+                     lblParameter2.setText("SetPoint:");
+                     lblParameter3.setText("Resistência:");
+                     lblParameter4.setText("Motor:");
+                     lblParameter5.setText("Rampa atual:");
+
+                     lblResult1.setText(Integer.toString(status.readStatus().getJSONObject("Tank1").getInt("Temperature")) + "ºC");
+                     lblResult2.setText(Integer.toString(status.readStatus().getJSONObject("Tank1").getInt("SetPoint")) + "ºC");
+                     lblResult3.setText(booleanStatus(status.readStatus().getJSONObject("Tank1").getBoolean("Resistence")));
+                     lblResult4.setText(booleanStatus(status.readStatus().getJSONObject("Tank1").getBoolean("Motor")));
+                     lblResult5.setText(Integer.toString(status.readStatus().getJSONObject("Tank1").getInt("ActualRamp")));
+                     break;
+                 case 2:
+                     lblTankNumber.setText("Tanque 2");
+
+                     lblParameter1.setText("Motor:");
+                     lblParameter2.setText("");
+                     lblParameter3.setText("");
+                     lblParameter4.setText("");
+                     lblParameter5.setText("");
+
+                     lblResult1.setText(booleanStatus(status.readStatus().getJSONObject("Tank2").getBoolean("Motor")));
+                     lblResult2.setText("");
+                     lblResult3.setText("");
+                     lblResult4.setText("");
+                     lblResult5.setText("");
+                     break;
+                 case 3:
+                     lblTankNumber.setText("Tanque 3");
+
+                     lblParameter1.setText("Temperatura:");
+                     lblParameter2.setText("SetPoint");
+                     lblParameter3.setText("Resistência:");
+                     lblParameter4.setText("");
+                     lblParameter5.setText("");
+                     lblResult1.setText(Integer.toString(status.readStatus().getJSONObject("Tank3").getInt("Temperature")) + "ºC");
+                     lblResult2.setText(Integer.toString(status.readStatus().getJSONObject("Tank3").getInt("SetPoint")) + "ºC");
+                     lblResult3.setText(booleanStatus(status.readStatus().getJSONObject("Tank3").getBoolean("Resistence")));
+                     lblResult4.setText("");
+                     lblResult5.setText("");
+                     break;
+                }
+             } catch (InterruptedException ex) {
+                Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
+             
+         }
+            
         
         private String booleanStatus(boolean status){
             if(status) return "LIGADO";
