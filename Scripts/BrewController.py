@@ -31,13 +31,15 @@ def statusSync():
             gpioController.setMotor2(StatusController.readStatus()['Tank2']['Motor'])
             gpioController.setResistence1(StatusController.readStatus()['Tank1']['Resistence'])
             gpioController.setResistence2(StatusController.readStatus()['Tank3']['Resistence'])
-            print(temperatureSensors.getTank1Sensor())
+            print(tempTank1)
+            print(tempTank3)
         except:
             pass
 
 def brew():
     while True:
         try:
+            sleep(1)
             print('Lendo Status')
             status =  StatusController.readStatus()
             if status['BrewStatus'] ==  'Em andamento' and status['BrewMode'] == 'Automatic':
