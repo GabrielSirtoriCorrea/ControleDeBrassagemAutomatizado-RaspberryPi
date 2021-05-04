@@ -37,24 +37,26 @@ def statusSync():
             pass
 
 def brew():
+    gpioController.buzzerBeep(0.5)
     while True:
         try:
             sleep(1)
             print('Lendo Status')
             status =  StatusController.readStatus()
             if status['BrewStatus'] ==  'Em andamento' and status['BrewMode'] == 'Automatic':
-                StatusController.buzzerBeep(0.5)
+                gpioController.buzzerBeep(0.5)
                 StatusController.writeStatus('Tank1', 'Motor', True)
                 print('Motor 1 ligado')
                 temperature  =  status['Tank1']['Temperature']
                 setPoint = status['Tank1']['SetPoint']
 
-                while temperature +1 < setPoint:
+                while temperature < setPoint:
                     print('Setpoint')
                     StatusController.writeStatus('Tank1', 'Resistence', True)
                     temperature  =  StatusController.readStatus()['Tank1']['Temperature']
                     
                 StatusController.writeStatus('Tank1', 'Resistence', False)
+                gpioController.buzzerBeep(0.5)
                 StatusController.writeStatus('Tank1', 'MaltAlert', True)
                 print('Adicionar malte')
                 sleep(0.5)
@@ -63,8 +65,7 @@ def brew():
 
                 actualRamp = 1
                 for malt in status['Tank1']['Ramps']:
-                    StatusController.buzzerBeep(0.5)
-                    StatusController.buzzerBeep(0.5)
+                    gpioController.buzzerBeep(0.5)
                     print('Rampa ', actualRamp)
                     StatusController.writeStatus('Tank1', 'ActualRamp', actualRamp)
                     StatusController.writeStatus('Tank1', 'SetPoint', malt[0])
@@ -78,13 +79,13 @@ def brew():
                         else:
                             StatusController.writeStatus('Tank1', 'Resistence', False)
 
-                            temperature = StatusController.readStatus()['Tank1']['Temperature']
+                        temperature = StatusController.readStatus()['Tank1']['Temperature']
 
                     actualRamp+=1
 
                 StatusController.writeStatus('Tank1', 'Motor', False)
-                StatusController.buzzerBeep(0.5)
-                StatusController.buzzerBeep(0.5)
+                StatusController.writeStatus('Tank1', 'Resistence', False)
+                gpioController.buzzerBeep(0.5)
                 StatusController.writeStatus('Tank1', 'NextProcess', True)
                 StatusController.writeStatus(None, 'Bomb', True)
                 print('Bomba Ligada')
@@ -95,8 +96,7 @@ def brew():
                 StatusController.writeStatus('Tank2', 'Motor', True)
                 print('Motor 2 ligado, Clarificação')
                 sleep(StatusController.readStatus()['Tank2']['ClarificationTime']*60)
-                StatusController.buzzerBeep(0.5)
-                StatusController.buzzerBeep(0.5)
+                gpioController.buzzerBeep(0.5)
                 StatusController.writeStatus('Tank2', 'NextProcess', True)
                 print('Proximo processo')
                 sleep(0.5)
@@ -113,7 +113,7 @@ def brew():
 
                 while time() < boilTime:
                     print(hops)
-                    if temperature + 2 < setPoint:
+                    if temperature < setPoint:
                         StatusController.writeStatus('Tank3', 'Resistence', True)
                     else:
                         StatusController.writeStatus('Tank3', 'Resistence', False)
@@ -121,14 +121,14 @@ def brew():
                     if len(hops) != 0 and time() >= clock + (hops[0]*60):
                         hops.pop(0)
                         print('Adicionar Lupulo')
-                        StatusController.buzzerBeep(0.5)
-                        StatusController.buzzerBeep(0.5)
+                        gpioController.buzzerBeep(0.5)
                         StatusController.writeStatus('Tank3', 'HopAlert', True)
                         sleep(0.4)
                         StatusController.writeStatus('Tank3', 'HopAlert', False)
                 
-                StatusController.buzzerBeep(0.5)
-                StatusController.buzzerBeep(0.5)
+                    temperature = StatusController.readStatus()['Tank3']['Temperature']
+
+                gpioController.buzzerBeep(0.5)
                 StatusController.writeStatus('Tank3', 'NextProcess', True)
                 print('Proximo processo')
                 StatusController.writeStatus(None, 'BrewStatus', 'Pausado')
