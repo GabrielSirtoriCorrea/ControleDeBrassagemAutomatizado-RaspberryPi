@@ -9,7 +9,7 @@ class GPIOController:
         self.MOTOR_1 = 13
         self.MOTOR_2 = 6
         self.RESISTENCE_1 = 5
-        self.RESISTENCE_2 = 6
+        self.RESISTENCE_2 = 11
         self.BUZZER = 22
 
         GPIO.cleanup()
