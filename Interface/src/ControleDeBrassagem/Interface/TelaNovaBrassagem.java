@@ -40,7 +40,8 @@ public class TelaNovaBrassagem extends javax.swing.JFrame {
         lblTarget1.setText("0");
         allRampsArray  = new JSONArray();
         allHopsArray  = new JSONArray();
-       
+       actualRampArray = new JSONArray();
+        
         setSecondConfigVisible(false);
     }
 
@@ -209,7 +210,6 @@ public class TelaNovaBrassagem extends javax.swing.JFrame {
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
         // TODO add your handling code here:
         status = new StatusController();
-        actualRampArray = new JSONArray();
         
         switch(config){
             case 0:

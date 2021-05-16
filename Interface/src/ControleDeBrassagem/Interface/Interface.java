@@ -118,7 +118,7 @@ public class Interface extends javax.swing.JFrame {
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 410, -1, -1));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Group 5.png"))); // NOI18N
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 390, 250, 230));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 390, 250, 230));
 
         btnTank2.setBackground(new java.awt.Color(51, 102, 255));
         btnTank2.setText("BOTAO TANQUE 2");
@@ -274,7 +274,7 @@ public class Interface extends javax.swing.JFrame {
 
         jLabel23.setFont(new java.awt.Font("Comic Sans MS", 1, 20)); // NOI18N
         jLabel23.setText("MODO DE BRASSAGEM: AUTOMÁTICO");
-        getContentPane().add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 490, 50));
+        getContentPane().add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 410, 50));
 
         jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 9.png"))); // NOI18N
         getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 440, 70));
