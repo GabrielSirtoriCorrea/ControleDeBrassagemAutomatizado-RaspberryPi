@@ -169,87 +169,90 @@ A classe StatusController é uma classe simples Java sendo a única no projeto q
 
 A implementação do método **readStatus()** é simples, só precisamos ler o arquivo Status.json com a classe **FileReader** do pocote java.io, converter para um tipo JSONObject, armazenar em uma variável e retorná-la. Essa implementação foi feita dentro de um LOOP while, isso nos permite fazer uma verificação de se a variável retornada está vazia, se ela estiver, acontece novamente a leitura. Esse tipo de erro pode ocorrer quando os scripts python estiverem manipulando os dados do arquivo, dessa forma, o JSONObject não será retornado vazio, evitando um erro em outra parte do sistema.
 
-```public static JSONObject readStatus(){
-        do{
-            try {
-                jsonParser = new JSONParser();
-                jsonObject = new JSONObject(jsonParser.parse(new FileReader("../status.json")).toString());
-            } catch (ParseException | IOException | NullPointerException e) {
-                e.printStackTrace();
-            }
-        }while(jsonObject.isEmpty());
+```
+public static JSONObject readStatus(){
+    do{
+        try {
+            jsonParser = new JSONParser();
+            jsonObject = new JSONObject(jsonParser.parse(new FileReader("../status.json")).toString());
+        } catch (ParseException | IOException | NullPointerException e) {
+            e.printStackTrace();
+        }
+    }while(jsonObject.isEmpty());
             
-        return jsonObject;
+    return jsonObject;
     }
 ```
 
 O método **writeStatus()** foi implementado da seguinte forma, primeiro, utilizamos o método **readStatus()** da própria classe para lermos os estados atuais de Status.json e armazená-los em uma variável do tipo JSONObject, podendo assim manipular o JSON através do método **put()**. Após isso, criamos um objeto da classe **FileWriter**, contida no pacote java.io, e escrevemos o JSONObject no arquivo Status.json, através do método **write()**. É importante ressaltar também que foi utilizado um polimorfismo em **writeStatus()**, para que possamos escrever no JSON um objeto qualquer ou um JSONArray. Além disso, colocamos uma verificação do parâmetro tank em ambos os métodos, isso nos permite mudar as variáveis de um tanque, ou do projeto como um todo.
 
-```public static void writeStatus(String  tank, String target, Object value){
-        try {
-            if(tank != null){
-                originalJson = readStatus();
-                jsonObject = readStatus().getJSONObject(tank);
-                jsonObject.put(target, value);
-                originalJson.put(tank, jsonObject);
-                System.out.println(jsonObject);
-                writer = new FileWriter("../status.json");
+```
+public static void writeStatus(String  tank, String target, Object value){
+    try {
+        if(tank != null){
+            originalJson = readStatus();
+            jsonObject = readStatus().getJSONObject(tank);
+            jsonObject.put(target, value);
+            originalJson.put(tank, jsonObject);
+            System.out.println(jsonObject);
+            writer = new FileWriter("../status.json");
                 
-                writer.write(originalJson.toString());
-            }else{
-                 jsonObject = readStatus();
-                 writer = new FileWriter("../status.json");
-                System.out.println(jsonObject);
-                jsonObject.put(target, value);
-                writer.write(jsonObject.toString());
-            }
-            
-            writer.close();
-        } catch (IOException ex) {
-           ex.printStackTrace();
+            writer.write(originalJson.toString());
+        }else{
+            jsonObject = readStatus();
+            writer = new FileWriter("../status.json");
+            System.out.println(jsonObject);
+            jsonObject.put(target, value);
+            writer.write(jsonObject.toString());
         }
+            
+        writer.close();
+    } catch (IOException ex) {
+       ex.printStackTrace();
     }
+}
 
 public static void writeStatus(String  tank, String target, JSONArray value){
-        try {
-            if(tank != null){
-                originalJson = readStatus();
-                jsonObject = readStatus().getJSONObject(tank);
-                jsonObject.put(target, value);
-                originalJson.put(tank, jsonObject);
-                System.out.println(jsonObject);
-                writer = new FileWriter("../status.json");
+    try {
+        if(tank != null){
+            originalJson = readStatus();
+            jsonObject = readStatus().getJSONObject(tank);
+            jsonObject.put(target, value);
+            originalJson.put(tank, jsonObject);
+            System.out.println(jsonObject);
+            writer = new FileWriter("../status.json");
                 
-                writer.write(originalJson.toString());
-            }else{
-                 jsonObject = readStatus();
-                 writer = new FileWriter("../status.json");
-                System.out.println(jsonObject);
-                jsonObject.put(target, value);
-                writer.write(jsonObject.toString());
-            }
-            
-            writer.close();
-        } catch (IOException ex) {
-           ex.printStackTrace();
+            writer.write(originalJson.toString());
+        }else{
+            jsonObject = readStatus();
+            writer = new FileWriter("../status.json");
+            System.out.println(jsonObject);
+            jsonObject.put(target, value);
+            writer.write(jsonObject.toString());
         }
+            
+        writer.close();
+    } catch (IOException ex) {
+        ex.printStackTrace();
     }
+}
 ```
 
 O método **resetStatus()** também foi de implementado de forma simples, apenas criamos um novo JSONObject a partir de uma String que contém todos os valores do JSON setado em 0 ou false, a partir disso, escrevemos no Arquivo utilizando o **FileWriter** novamente 
 
-```public static void resetStatus(){
-        try { 
-            jsonObject = new JSONObject("{\"BrewStatus\":\"Pausado\",\"Tank3\":{\"Temperature\":0,\"NextProcess\":false,\"Hops\":[0,0,0],\"BoilTime\":0,\"SetPoint\":0,\"Resistence\":false,\"HopAlert\":false},\"Tank2\":{\"ClarificationTime\":0,\"Motor\":false,\"NextProcess\":false},\"BrewMode\":\"Automatic\",\"Tank1\":{\"Ramps\":[[0,0],[0,0]],\"MaltAlert\":false,\"Temperature\":0,\"Motor\":false,\"NextProcess\":false,\"SetPoint\":0,\"ActualRamp\":0,\"Resistence\":false},\"Bomb\":false}");
+```
+public static void resetStatus(){
+    try { 
+        jsonObject = new JSONObject("{\"BrewStatus\":\"Pausado\",\"Tank3\":{\"Temperature\":0,\"NextProcess\":false,\"Hops\":[0,0,0],\"BoilTime\":0,\"SetPoint\":0,\"Resistence\":false,\"HopAlert\":false},\"Tank2\":{\"ClarificationTime\":0,\"Motor\":false,\"NextProcess\":false},\"BrewMode\":\"Automatic\",\"Tank1\":{\"Ramps\":[[0,0],[0,0]],\"MaltAlert\":false,\"Temperature\":0,\"Motor\":false,\"NextProcess\":false,\"SetPoint\":0,\"ActualRamp\":0,\"Resistence\":false},\"Bomb\":false}");
 
-            writer = new FileWriter("../status.json");
-            writer.write(jsonObject.toString());
-            writer.close();
-        } catch (IOException ex) {
-            Logger.getLogger(StatusController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        writer = new FileWriter("../status.json");
+        writer.write(jsonObject.toString());
+        writer.close();
+    } catch (IOException ex) {
+        Logger.getLogger(StatusController.class.getName()).log(Level.SEVERE, null, ex);
     }
+        
+}
 ```
 
 #### Interface.java
@@ -283,143 +286,148 @@ Com todos os Botões e Labels já adicionados, precisamos implementar os método
 
 Para os botões **btnChangeMode** e **btnNewBrew** foram adicionadas apenas funções que chamam uma outra classe, abaixo temos um exemplo dessa implementação:
 
-```private void btnNewBrewActionPerformed(java.awt.event.ActionEvent evt){                                           
-        new TelaNovaBrassagem().setVisible(true);
-        dispose();
+```
+private void btnNewBrewActionPerformed(java.awt.event.ActionEvent evt){                                           
+    new TelaNovaBrassagem().setVisible(true);
+    dispose();
     }
 ```
 
 Nos botões **btnTank1**, **btnTank2**, **btnTank3** apenas mudamos o valor da variável **tankControled**, ela é responsável por armazenar o valor do tanque na qual as variáveis estão sendo exibidas na tela.
 
-```private void btnTank1ActionPerformed(java.awt.event.ActionEvent evt) {
-         tankControled = 1;
-    }
+```
+private void btnTank1ActionPerformed(java.awt.event.ActionEvent evt) {
+    tankControled = 1;
+}
 ```
 
 No botão **btnEmergency**, chamamos o método **resetStatus()** da classe StatusController, dessa forma, todos os valores contidos em Status.json são resetados.
 
-```private void btnEmergencyActionPerformed(java.awt.event.ActionEvent evt){  
-        new StatusController().resetStatus();
-    }
+```
+private void btnEmergencyActionPerformed(java.awt.event.ActionEvent evt){  
+    new StatusController().resetStatus();
+}
 ```
 
 No Botão **btnStartBrew** criamos um objeto da classe StatusController e com o método **writeStatus()** mudamos o valor da váriavel **BrewStatus**, contida no em Status.json, para EM ANDAMENTO ou PAUSADO, isso vai depender do valor que estava contido anteriormente.
 
-```private void btnStartBrewActionPerformed(java.awt.event.ActionEvent evt) {                   
-        status = new StatusController();
+```
+private void btnStartBrewActionPerformed(java.awt.event.ActionEvent evt) {                   
+    status = new StatusController();
         
-        if(brewStarted){
-         status.writeStatus(null, "BrewStatus", "Pausado");
-         lblBrewStatus.setText("PAUSADO");
-         lblStartStop.setText("<html><center> INICIAR BRASSAGEM <center></html>");
-        }else{
-         status.writeStatus(null, "BrewStatus", "Em andamento");
-         lblBrewStatus.setText("EM ANDAMENTO");
-         lblStartStop.setText("<html><center> PAUSAR BRASSAGEM <center></html>");
-        }
-        
-        brewStarted = !brewStarted;
+    if(brewStarted){
+    status.writeStatus(null, "BrewStatus", "Pausado");
+    lblBrewStatus.setText("PAUSADO");
+    lblStartStop.setText("<html><center> INICIAR BRASSAGEM <center></html>");
+    }else{
+    status.writeStatus(null, "BrewStatus", "Em andamento");
+    lblBrewStatus.setText("EM ANDAMENTO");
+    lblStartStop.setText("<html><center> PAUSAR BRASSAGEM <center></html>");
     }
-
+        
+    brewStarted = !brewStarted;
+}
 ```
 
 Agora que nós ja temos todos os componentes e implementamos os métodos de todos os botões, precisamos fazer com que eles sejam atualizados constantemente, para sabermos os valores atuais das variáveis. Para isso, foi adicionada uma nova classe dentro da classe Interface.java, sendo ela a **TankController**, essa classe implementa as funções de uma interface java, chamada **ActionListener**, que foi importada para o projeto e contém o método abstrato **actionPerformed()**, esse método permite que todas as instruções contidas nele sejam executadas em LOOP, nos permitindo atualizar as variáveis em tempo real, abaixo podemos ver um exemplo para implementação da interface java **ActionListener**.
 
-```class TankController implements ActionListener{
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            try {
+```
+class TankController implements ActionListener{
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        try {
 
-                //Instruções a serem executadas em LOOP
+            //Instruções a serem executadas em LOOP
 
-             } catch (InterruptedException ex) {
-                Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
-            }
-         } 
-    }
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    } 
+}
 ```
 
 Podemos agora implementar a função actionPerformed() com tudo que queremos executar em loop no nosso sistema. No nosso caso, vamos fazer a verificação da variável **tankControled**, e mostrar os valores das variáveis do tanque correspondente, além de verificar as variáveis **Alert** em Status.json, para que possamos mostrar um alerta na tela, avisando ao usuário que uma etapa da produção foi finalizada.
 
-``` class TankController implements ActionListener{
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            try {
-                Thread.currentThread().sleep(1000);
-                status = new StatusController();
-                lblBomb.setText(booleanStatus(status.readStatus().getBoolean("Bomb")));
+```
+class TankController implements ActionListener{
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        try {
+            Thread.currentThread().sleep(1000);
+            status = new StatusController();
+            lblBomb.setText(booleanStatus(status.readStatus().getBoolean("Bomb")));
 
-                if(status.readStatus().getJSONObject("Tank1").getBoolean("MaltAlert")){   //Verificação dos alertas
-                    JOptionPane.showMessageDialog(null, "ADICIONE O MALTE NA PANELA DE MOSTURAÇÃO!!!", "ATENÇÃO!!!", JOptionPane.WARNING_MESSAGE);
-                }
-                if(status.readStatus().getJSONObject("Tank3").getBoolean("HopAlert")){
-                    JOptionPane.showMessageDialog(null, "ADICIONE O LÚPULO NA PANELA DE FERVURA!!!", "ATENÇÃO!!!", JOptionPane.WARNING_MESSAGE);
-                }
-                if(status.readStatus().getJSONObject("Tank1").getBoolean("NextProcess")){
-                    JOptionPane.showMessageDialog(null, "ACIONE AS VÁVULAS PARA O PROCESSO DE CLARIFICAÇÃO!!!", "ATENÇÃO!!!", JOptionPane.WARNING_MESSAGE);
-                }
-                if(status.readStatus().getJSONObject("Tank2").getBoolean("NextProcess")){
-                    JOptionPane.showMessageDialog(null, "ACIONE AS VÁVULAS PARA O PROCESSO DE FERVURA!!!", "ATENÇÃO!!!", JOptionPane.WARNING_MESSAGE);
-                }
-                if(status.readStatus().getJSONObject("Tank3").getBoolean("NextProcess")){
-                    JOptionPane.showMessageDialog(null, "ACIONE AS VÁVULAS PARA O PROCESSO DE FERMENTAÇÃO!!!", "ATENÇÃO!!!", JOptionPane.WARNING_MESSAGE);
-                }
+            if(status.readStatus().getJSONObject("Tank1").getBoolean("MaltAlert")){   //Verificação dos alertas
+                JOptionPane.showMessageDialog(null, "ADICIONE O MALTE NA PANELA DE MOSTURAÇÃO!!!", "ATENÇÃO!!!", JOptionPane.WARNING_MESSAGE);
+            }
+            if(status.readStatus().getJSONObject("Tank3").getBoolean("HopAlert")){
+                JOptionPane.showMessageDialog(null, "ADICIONE O LÚPULO NA PANELA DE FERVURA!!!", "ATENÇÃO!!!", JOptionPane.WARNING_MESSAGE);
+            }
+            if(status.readStatus().getJSONObject("Tank1").getBoolean("NextProcess")){
+                JOptionPane.showMessageDialog(null, "ACIONE AS VÁVULAS PARA O PROCESSO DE CLARIFICAÇÃO!!!", "ATENÇÃO!!!", JOptionPane.WARNING_MESSAGE);
+            }
+            if(status.readStatus().getJSONObject("Tank2").getBoolean("NextProcess")){
+                JOptionPane.showMessageDialog(null, "ACIONE AS VÁVULAS PARA O PROCESSO DE FERVURA!!!", "ATENÇÃO!!!", JOptionPane.WARNING_MESSAGE);
+            }
+            if(status.readStatus().getJSONObject("Tank3").getBoolean("NextProcess")){
+                JOptionPane.showMessageDialog(null, "ACIONE AS VÁVULAS PARA O PROCESSO DE FERMENTAÇÃO!!!", "ATENÇÃO!!!", JOptionPane.WARNING_MESSAGE);
+            }
 
-              switch(tankControled){  //Verificação do tanque na qual deve exibir as variáveis 
-                 case 1:
-                     lblTankNumber.setText("Tanque 1");
+            switch(tankControled){  //Verificação do tanque na qual deve exibir as variáveis 
+                case 1:
+                    lblTankNumber.setText("Tanque 1");
 
-                     lblParameter1.setText("Temperatura:");
-                     lblParameter2.setText("SetPoint:");
-                     lblParameter3.setText("Resistência:");
-                     lblParameter4.setText("Motor:");
-                     lblParameter5.setText("Rampa atual:");
+                    lblParameter1.setText("Temperatura:");
+                    lblParameter2.setText("SetPoint:");
+                    lblParameter3.setText("Resistência:");
+                    lblParameter4.setText("Motor:");
+                    lblParameter5.setText("Rampa atual:");
 
-                     lblResult1.setText(Integer.toString(status.readStatus().getJSONObject("Tank1").getInt("Temperature")) + "ºC");
-                     lblResult2.setText(Integer.toString(status.readStatus().getJSONObject("Tank1").getInt("SetPoint")) + "ºC");
-                     lblResult3.setText(booleanStatus(status.readStatus().getJSONObject("Tank1").getBoolean("Resistence")));
-                     lblResult4.setText(booleanStatus(status.readStatus().getJSONObject("Tank1").getBoolean("Motor")));
+                    lblResult1.setText(Integer.toString(status.readStatus().getJSONObject("Tank1").getInt("Temperature")) + "ºC");
+                    lblResult2.setText(Integer.toString(status.readStatus().getJSONObject("Tank1").getInt("SetPoint")) + "ºC");
+                    lblResult3.setText(booleanStatus(status.readStatus().getJSONObject("Tank1").getBoolean("Resistence")));
+                    lblResult4.setText(booleanStatus(status.readStatus().getJSONObject("Tank1").getBoolean("Motor")));
                      lblResult5.setText(Integer.toString(status.readStatus().getJSONObject("Tank1").getInt("ActualRamp")));
                      break;
-                 case 2:
-                     lblTankNumber.setText("Tanque 2");
+                case 2:
+                    lblTankNumber.setText("Tanque 2");
 
-                     lblParameter1.setText("Motor:");
-                     lblParameter2.setText("");
-                     lblParameter3.setText("");
-                     lblParameter4.setText("");
-                     lblParameter5.setText("");
+                    lblParameter1.setText("Motor:");
+                    lblParameter2.setText("");
+                    lblParameter3.setText("");
+                    lblParameter4.setText("");
+                    lblParameter5.setText("");
 
-                     lblResult1.setText(booleanStatus(status.readStatus().getJSONObject("Tank2").getBoolean("Motor")));
-                     lblResult2.setText("");
-                     lblResult3.setText("");
-                     lblResult4.setText("");
-                     lblResult5.setText("");
-                     break;
-                 case 3:
-                     lblTankNumber.setText("Tanque 3");
+                    lblResult1.setText(booleanStatus(status.readStatus().getJSONObject("Tank2").getBoolean("Motor"));
+                    lblResult2.setText("");
+                    lblResult3.setText("");
+                    lblResult4.setText("");
+                    lblResult5.setText("");
+                    break;
+                case 3:
+                    lblTankNumber.setText("Tanque 3");
 
-                     lblParameter1.setText("Temperatura:");
-                     lblParameter2.setText("SetPoint");
-                     lblParameter3.setText("Resistência:");
-                     lblParameter4.setText("");
-                     lblParameter5.setText("");
-                     lblResult1.setText(Integer.toString(status.readStatus().getJSONObject("Tank3").getInt("Temperature")) + "ºC");
-                     lblResult2.setText(Integer.toString(status.readStatus().getJSONObject("Tank3").getInt("SetPoint")) + "ºC");
-                     lblResult3.setText(booleanStatus(status.readStatus().getJSONObject("Tank3").getBoolean("Resistence")));
-                     lblResult4.setText("");
-                     lblResult5.setText("");
-                     break;
-                }
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
-            }  
-        }
-        private String booleanStatus(boolean status){
-            if(status) return "LIGADO";
-            else return "DESLIGADO";
-        }
+                    lblParameter1.setText("Temperatura:");
+                    lblParameter2.setText("SetPoint");
+                    lblParameter3.setText("Resistência:");
+                    lblParameter4.setText("");
+                    lblParameter5.setText("");
+                    lblResult1.setText(Integer.toString(status.readStatus().getJSONObject("Tank3").getInt("Temperature")) + "ºC");
+                    lblResult2.setText(Integer.toString(status.readStatus().getJSONObject("Tank3").getInt("SetPoint")) + "ºC");
+                    lblResult3.setText(booleanStatus(status.readStatus().getJSONObject("Tank3").getBoolean("Resistence")));
+                    lblResult4.setText("");
+                    lblResult5.setText("");
+                    break;
+            }
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
+        }  
     }
+    private String booleanStatus(boolean status){
+        if(status) return "LIGADO";
+        else return "DESLIGADO";
+    }
+}
 ```
 
 Depois de implementarmos o método, precisamos executá-lo, para isso precisamos importar a classe **Timer** do pacote Swing, e criarmos um objeto passando como parâmetro um objeto da classe **TankController**, após isso, chamamos o método **start()**.
@@ -460,26 +468,28 @@ Para esse layout, temos os seguintes componentes
 
 Para a brassagem manual, os botões **btnMotorTank1**, **btnMotorTank2** e **btnBomb** tem a função de mudar as variáveis contidas em Status.json de forma direta, então podemos apenas pegar o valor atual da variável com o método **readStatus()** de StatusController, inverter o seu valor, e escreve-lo em Status.json, através do método **writeStatus()**. Para o usuário ter a informação do valor da variável, foi adicionado um ícone de ON/OFF em um label vazio, a imagem a ser exibida, depende do valor da variável do JSON.
 
-```private void btnBombActionPerformed(java.awt.event.ActionEvent evt) {
-        status = new StatusController();
-        newStatus =  !status.readStatus().getBoolean("Bomb");
-        status.writeStatus(null, "Bomb", newStatus);
-        if(newStatus){
-            ledBomb.setIcon(ledON);
-        }else{
-            ledBomb.setIcon(ledOFF);
-        }
+```
+private void btnBombActionPerformed(java.awt.event.ActionEvent evt) {
+    status = new StatusController();
+    newStatus =  !status.readStatus().getBoolean("Bomb");
+    status.writeStatus(null, "Bomb", newStatus);
+    if(newStatus){
+        ledBomb.setIcon(ledON);
+    }else{
+        ledBomb.setIcon(ledOFF);
+    }
 ```
 
 Os botões **btnSubSetPointTank1**, **btnSubSetPointTank3**, **btnAdSetPointTank1** e **btnAdSetPointTank3**, foram implementados com uma lógica semelhante a dos botões citados anteriormente, sua única diferença é a de adicionar +1 ou subtrair -1 ao valor lido, e mostrá-lo no label correspondente.
 
-```private void btnAdSetpointTank1ActionPerformed(java.awt.event.ActionEvent evt) { 
-        status = new StatusController();
-        newValue =  status.readStatus().getJSONObject("Tank1").getInt("SetPoint") + 1;
-        status.writeStatus("Tank1", "SetPoint", newValue);
-        System.out.println(status.readStatus().getJSONObject("Tank1").getInt("SetPoint"));
-        lblSetpointTank1.setText(Integer.toString(newValue)+"ºC");
-    }
+```
+private void btnAdSetpointTank1ActionPerformed(java.awt.event.ActionEvent evt) { 
+    status = new StatusController();
+    newValue =  status.readStatus().getJSONObject("Tank1").getInt("SetPoint") + 1;
+    status.writeStatus("Tank1", "SetPoint", newValue);
+    System.out.println(status.readStatus().getJSONObject("Tank1").getInt("SetPoint"));
+    lblSetpointTank1.setText(Integer.toString(newValue)+"ºC");
+}
 ```
 
 Para os botões **btnEmergency** e **btnChangeMode** foi utilizado as mesmas funções descritas em TelaInicial.
@@ -506,112 +516,114 @@ e os seguintes componentes:
 
 Nos botões **btnBottomArrow** e **btnTopArrow** foi adicionada para o controle da variável **targetValue**, ela é responsável por armazenar o valor que está sendo exibido em lblTarget, e o usuário a manipula através dos botões, adicionando-a ou subtraindo-a o valor 1.
 
-```private void btnBottomArrowActionPerformed(java.awt.event.ActionEvent evt) {   
-        targetValue--;
-        lblTarget.setText(Integer.toString(targetValue));
-    }                                              
+```
+private void btnBottomArrowActionPerformed(java.awt.event.ActionEvent evt) {   
+    targetValue--;
+    lblTarget.setText(Integer.toString(targetValue));
+}                                              
 
-    private void btnTopArrowActionPerformed(java.awt.event.ActionEvent evt) {    
-        targetValue++;
-        lblTarget.setText(Integer.toString(targetValue));
-    }
+private void btnTopArrowActionPerformed(java.awt.event.ActionEvent evt) {    
+    targetValue++;
+    lblTarget.setText(Integer.toString(targetValue));
+}
 ```
 
 É no botão **btnNext** que toda a lógica para adicionarmos os dados em Status.json está contida, para fazermos isso, utilizamos novamente os métodos **readStatus()** e **writeStatus()** contidos em StatusController. Para controlarmos qual parâmetro deve ser configurado, foi criada a variável **config**, ela armazena um valor inteiro, e através de um switch, adicionamos o valor no Status.json e mudamos os valores de lblConfig para o próximo parâmetro a ser configurado.
 
-```private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {
-        config = 0;                         //No código original, os atributos foram declarados no início
-        actualRamp = 1;
-        actualHop = 1;
-        targetValue = 0;
-        target1Value = 0;
-        allRampsArray  = new JSONArray();
-        allHopsArray  = new JSONArray();
-        actualRampArray = new JSONArray();
+```
+private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {
+    config = 0;                         //No código original, os atributos foram declarados no início
+    actualRamp = 1;
+    actualHop = 1;
+    targetValue = 0;
+    target1Value = 0;
+    allRampsArray  = new JSONArray();
+    allHopsArray  = new JSONArray();
+    actualRampArray = new JSONArray();
 
-        status = new StatusController();
+    status = new StatusController();
         
-        switch(config){
-            case 0:
-                status.writeStatus("Tank1", "SetPoint", targetValue);
-                lblConfig.setText("Quantidade de rampas: ");
-                lblUnidTarget.setVisible(false);
-                setTargetsValues(0,0);
-                config++;
-                break;
-            case 1:
-                rampsNumber =  targetValue;
-                lblConfig.setText("Temperatura rampa 1:");
-                lblUnidTarget.setVisible(true);
-                lblConfig1.setText("tempo rampa 1:");
-                setSecondConfigVisible(true);
-                setTargetsValues(0,0);
-                config++;
-                break;
-            case 2:
-                actualRampArray.add(Integer.parseInt(lblTarget.getText()));
-                actualRampArray.add(Integer.parseInt(lblTarget1.getText()));
-                allRampsArray.add(actualRampArray);
-                rampsNumber--;
-                actualRamp++;
-                lblConfig.setText("Temperatura rampa " + Integer.toString(actualRamp) + ":");
-                lblConfig1.setText("tempo rampa "+ Integer.toString(actualRamp) + ":");
-                setTargetsValues(0,0);
-                if(rampsNumber ==  0){
-                    status.writeStatus("Tank1", "Ramps", allRampsArray);
-                    setSecondConfigVisible(false);
-                    lblConfig.setText("Tempo de clarificação:");
-                    lblUnidTarget.setText("min");
-                    config++;
-                }
-                break;
-            case 3:
-                status.writeStatus("Tank2", "ClarificationTime", Integer.parseInt(lblTarget.getText()));
-                setTargetsValues(0,0);
-                lblConfig.setText("Temperatura de fervura:");
-                lblUnidTarget.setText("ºC");
-                config++;
-                break;
-            case 4:
-                status.writeStatus("Tank3", "SetPoint", Integer.parseInt(lblTarget.getText()));
-                setTargetsValues(0,0);
-                lblConfig.setText("Tempo de fervura:");
+    switch(config){
+        case 0:
+            status.writeStatus("Tank1", "SetPoint", targetValue);
+            lblConfig.setText("Quantidade de rampas: ");
+            lblUnidTarget.setVisible(false);
+            setTargetsValues(0,0);
+            config++;
+            break;
+        case 1:
+            rampsNumber =  targetValue;
+            lblConfig.setText("Temperatura rampa 1:");
+            lblUnidTarget.setVisible(true);
+            lblConfig1.setText("tempo rampa 1:");
+            setSecondConfigVisible(true);
+            setTargetsValues(0,0);
+            config++;
+            break;
+        case 2:
+            actualRampArray.add(Integer.parseInt(lblTarget.getText()));
+            actualRampArray.add(Integer.parseInt(lblTarget1.getText()));
+            allRampsArray.add(actualRampArray);
+            rampsNumber--;
+            actualRamp++;
+            lblConfig.setText("Temperatura rampa " + Integer.toString(actualRamp) + ":");
+            lblConfig1.setText("tempo rampa "+ Integer.toString(actualRamp) + ":");
+            setTargetsValues(0,0);
+            if(rampsNumber ==  0){
+                status.writeStatus("Tank1", "Ramps", allRampsArray);
+                setSecondConfigVisible(false);
+                lblConfig.setText("Tempo de clarificação:");
                 lblUnidTarget.setText("min");
                 config++;
-                break;
-             case 5:
-                 status.writeStatus("Tank3", "BoilTime", Integer.parseInt(lblTarget.getText()));
-                 setTargetsValues(0,0);
-                 lblConfig.setText("Quantidade de Lúpulos: ");
-                 lblUnidTarget.setVisible(false);
-                  config++;
-                break;
-             case 6:
-                 hopsNumber = targetValue;
-                 lblConfig.setText("Tempo do 1º Lúpulo:");
-                 lblUnidTarget.setVisible(true);
-                 setTargetsValues(0,0);
-                config++;
-                break;
-             case 7:
-                 allHopsArray.add(Integer.parseInt(lblTarget.getText()));
-                 hopsNumber--;
-                 actualHop++;
-                 lblConfig.setText("Tempo do " + Integer.toString(actualHop) + "º  Lúpulo:");
-                 setTargetsValues(0,0);
-                 if(hopsNumber == 1){
-                     lblNext.setText("FINALIZAR");
-                 }
-                 if(hopsNumber == 0){
-                     status.writeStatus("Tank3", "Hops", allHopsArray);
-                     new Interface().setVisible(true);
-                    dispose();
-                 }
-                break;
-             case 8:
-                break;
-        }   
-    }
+            }
+            break;
+        case 3:
+            status.writeStatus("Tank2", "ClarificationTime", Integer.parseInt(lblTarget.getText()));
+            setTargetsValues(0,0);
+            lblConfig.setText("Temperatura de fervura:");
+            lblUnidTarget.setText("ºC");
+            config++;
+            break;
+        case 4:
+            status.writeStatus("Tank3", "SetPoint", Integer.parseInt(lblTarget.getText()));
+            setTargetsValues(0,0);
+            lblConfig.setText("Tempo de fervura:");
+            lblUnidTarget.setText("min");
+            config++;
+            break;
+        case 5:
+            status.writeStatus("Tank3", "BoilTime", Integer.parseInt(lblTarget.getText()));
+            setTargetsValues(0,0);
+            lblConfig.setText("Quantidade de Lúpulos: ");
+            lblUnidTarget.setVisible(false);
+            config++;
+            break;
+        case 6:
+            hopsNumber = targetValue;
+            lblConfig.setText("Tempo do 1º Lúpulo:");
+            lblUnidTarget.setVisible(true);
+            setTargetsValues(0,0);
+            config++;
+            break;
+        case 7:
+            allHopsArray.add(Integer.parseInt(lblTarget.getText()));
+            hopsNumber--;
+            actualHop++;
+            lblConfig.setText("Tempo do " + Integer.toString(actualHop) + "º  Lúpulo:");
+            setTargetsValues(0,0);
+            if(hopsNumber == 1){
+                lblNext.setText("FINALIZAR");
+            }
+            if(hopsNumber == 0){
+                status.writeStatus("Tank3", "Hops", allHopsArray);
+                new Interface().setVisible(true);
+                dispose();
+            }
+            break;
+        case 8:
+            break;
+    }   
+}
 ```
 
 No botão **btnCancel**, apenas chamamos a classe TelaInicial, como ja foi feito anteriormente em outros métodos.
