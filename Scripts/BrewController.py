@@ -96,6 +96,7 @@ def brew():
                 StatusController.writeStatus('Tank2', 'Motor', True)
                 print('Motor 2 ligado, Clarificação')
                 sleep(StatusController.readStatus()['Tank2']['ClarificationTime']*60)
+                
                 gpioController.buzzerBeep(0.5)
                 StatusController.writeStatus('Tank2', 'NextProcess', True)
                 print('Proximo processo')
