@@ -31,8 +31,24 @@ def statusSync():
             gpioController.setMotor2(StatusController.readStatus()['Tank2']['Motor'])
             gpioController.setResistence1(StatusController.readStatus()['Tank1']['Resistence'])
             gpioController.setResistence2(StatusController.readStatus()['Tank3']['Resistence'])
+            
+            status = StatusController.readStatus()  
+
+            if status['BrewMode'] == 'Manual': 
+                if status['Tank1']['Temperature'] < status['Tank1']['SetPoint']:
+                    StatusController.writeStatus('Tank1', 'Resistence', True)
+                else:
+                    StatusController.writeStatus('Tank1', 'Resistence', False)
+
+            if status['BrewMode'] == 'Manual':
+                if status['Tank3']['Temperature'] < status['Tank3']['SetPoint']:
+                    StatusController.writeStatus('Tank3', 'Resistence', True)
+                else:
+                    StatusController.writeStatus('Tank3', 'Resistence', False)
+
             print(tempTank1)
             print(tempTank3)
+
         except:
             pass
 
