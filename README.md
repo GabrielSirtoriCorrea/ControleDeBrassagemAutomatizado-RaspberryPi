@@ -126,14 +126,14 @@ Agora que sabemos todos os componentes que iremos utilizar, precisamos criar uma
 
 A Interface do projeto foi criada com a linguagem **JAVA**, juntamente com o pacote **SWING** para a criação dos Layouts. Com esse pacote importado, as classes Java podem ter um layout, dessa forma, podemos mudar o Layout da Interface apenas chamando uma outra classe. Nesse projeto, temos 4 classes Java, sendo elas:
 
-- Interface.java
-- StatusController.java
-- TelaBrassagemManual.java
-- TelaNovaBrassagem.java
+- Interface.java: Tela inicial do sistema
+- StatusController.java: Contém métodos para leitura do arquivo Status.json
+- TelaBrassagemManual.java: Tela para brassagem de modo manual
+- TelaNovaBrassagem.java: Tela de configuração de uma nova brassagem
 
 #### StatusController.java
 
-A classe StatusController é uma classe simples Java sendo a única no projeto que não utiliza o pacote Swing. Ela é responsável por **Ler e Escrever** no arquivo **Status.json**, através dos métodos **readStatus()**, **writeStatus()** e **resetStatus()**, podemos fazer isso a partir do pacote **org.json**, que foi importado para o projeto. A estrutura do arquivo foi criada da seguinte forma:
+A classe StatusController é uma classe simples Java sendo a única no projeto que não utiliza o pacote Swing. Ela é responsável por **Ler e Escrever** no arquivo **Status.json**, através dos métodos **readStatus()**, **writeStatus()** e **resetStatus()**, podemos fazer isso a partir do pacote **org.json**, que foi importado para o projeto. A estrutura do arquivo **Status.json** foi criada da seguinte forma:
 
 ```
 {
@@ -167,7 +167,7 @@ A classe StatusController é uma classe simples Java sendo a única no projeto q
 }
 ```
 
-A implementação do método **readStatus()** é simples, só precisamos ler o arquivo Status.json com a classe **FileReader** do pocote java.io, converter para um tipo JSONObject, armazenar em uma variável e retorná-la. Essa implementação foi feita dentro de um LOOP while, isso nos permite fazer uma verificação de se a variável retornada está vazia, se ela estiver, acontece novamente a leitura. Esse tipo de erro pode ocorrer quando os scripts python estiverem manipulando os dados do arquivo, dessa forma, o JSONObject não será retornado vazio, evitando um erro em outra parte do sistema.
+A implementação do método **readStatus()** é simples, só precisamos ler o arquivo Status.json com a classe **FileReader** do pocote java.io, converter para um tipo JSONObject, armazenar em uma variável e retorná-la. Essa implementação foi feita dentro de um LOOP while, isso nos permite fazer uma verificação de se a variável retornada está vazia, se ela estiver, acontece novamente a leitura. Esse tipo de erro pode ocorrer quando os scripts estiverem manipulando os dados do arquivo, dessa forma, o JSONObject não será retornado vazio, evitando um erro em outra parte do sistema.
 
 ```
 public static JSONObject readStatus(){
@@ -238,7 +238,7 @@ public static void writeStatus(String  tank, String target, JSONArray value){
 }
 ```
 
-O método **resetStatus()** também foi de implementado de forma simples, apenas criamos um novo JSONObject a partir de uma String que contém todos os valores do JSON setado em 0 ou false, a partir disso, escrevemos no Arquivo utilizando o **FileWriter** novamente 
+O método **resetStatus()** também foi implementado de forma simples, apenas criamos um novo JSONObject a partir de uma String que contém todos os valores do JSON setado em 0 ou false, a partir disso, escrevemos no Arquivo utilizando o **FileWriter** novamente 
 
 ```
 public static void resetStatus(){
@@ -261,7 +261,7 @@ O layout da tela inicial foi criado da seguinte forma:
 
 ![TelaInicial](https://github.com/GabrielSirtoriCorrea/ControleDeBrassagemAutomatizado/blob/main/Planejamento/ImagensDocumentacao/TelaInicial.png)
 
-Para essa tela temos alguns componentes que são manipulados, pela classe, são eles:
+Para essa tela temos alguns componentes que são manipulados pela classe, são eles:
 
 - Labels:
 
@@ -278,9 +278,9 @@ Para essa tela temos alguns componentes que são manipulados, pela classe, são 
    - btnEmergency: Reseta todas as variáveis do arquivo Status.json.
    - btnNewBrew: Chama a classe TelaNovaBrassagem
    - btnStartBrew: Inicia a lógica do projeto
-   - btnTank1: Mostra os valores das váriaveis do tanque 1 noslabels lblResults
-   - btnTank2: Mostra os valores das váriaveis do tanque 2 noslabels lblResults 
-   - btnTank3: Mostra os valores das váriaveis do tanque 3 noslabels lblResults
+   - btnTank1: Mostra os valores das váriaveis do tanque 1 nos labels lblResults
+   - btnTank2: Mostra os valores das váriaveis do tanque 2 nos labels lblResults 
+   - btnTank3: Mostra os valores das váriaveis do tanque 3 nos labels lblResults
 
 Com todos os Botões e Labels já adicionados, precisamos implementar os métodos de cada botão para que as funções possam ser executadas quando pressionados.
 
