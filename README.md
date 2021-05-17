@@ -936,7 +936,7 @@ Trabalhei nesse projeto por 5 meses, não diretos, e sua realização foi muito 
 
 ## Me faça uma doação!
 
-Gostou do projeto? Me faça uma doação! Assim você me incentiva a aprender mais e criar novos projetos :D
+Gostou do projeto? Me faça uma doação! Assim você me incentiva a aprender mais e criar novos projetos :smiley:
 
 Você pode utilizar o App do seu banco para ler o QR Code abaixo, ou se preferir, utilizar minha chave pix:
 
