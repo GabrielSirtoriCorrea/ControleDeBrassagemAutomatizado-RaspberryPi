@@ -20,6 +20,11 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
     int newValue;
     ImageIcon ledON;
     ImageIcon ledOFF;
+    boolean motor1Status = false;
+    boolean motor2Status = false;
+    boolean bombStatus = false; 
+    int Tank1SetPointValue = 0;
+    int Tank3SetPointValue = 0;
     /**
      * Creates new form TelaBrassagemManual
      */
@@ -113,7 +118,7 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 9.png"))); // NOI18N
         getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 630, 70));
 
-        jLabel5.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
         jLabel5.setText("<html><center>MOTOR  TANQUE 2<center></html>");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 390, 160, 100));
 
@@ -128,7 +133,7 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
         getContentPane().add(btnMotorTank2, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 390, 160, 100));
 
         jLabel4.setFont(new java.awt.Font("Comic Sans MS", 1, 22)); // NOI18N
-        jLabel4.setText("<html><center>MOTOR \nTANQUE 1<center></html>");
+        jLabel4.setText("<html><center>MOTOR  TANQUE 1<center></html>");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 130, 170, 100));
 
         btnMotorTank1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ControleDeBrassagem/Images/Rectangle 18.png"))); // NOI18N
@@ -261,7 +266,7 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
     private void btnBombActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBombActionPerformed
         // TODO add your handling code here:
         status = new StatusController();
-        newStatus =  !status.readStatus().getBoolean("Bomb");
+        newStatus =  !bombStatus;
         status.writeStatus(null, "Bomb", newStatus);
         if(newStatus){
             ledBomb.setIcon(ledON);
@@ -292,46 +297,46 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
     private void btnSubSetpointTank3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubSetpointTank3ActionPerformed
         // TODO add your handling code here:
         status = new StatusController();
-        newValue =  status.readStatus().getJSONObject("Tank3").getInt("SetPoint") - 1;
-        status.writeStatus("Tank3", "SetPoint", newValue);
-        System.out.println(status.readStatus().getJSONObject("Tank3").getInt("SetPoint"));
-        lblSetpointTank3.setText(Integer.toString(newValue)+"ºC");
+        Tank3SetPointValue =  Tank3SetPointValue - 1;
+        status.writeStatus("Tank3", "SetPoint", Tank3SetPointValue);
+        //System.out.println(status.readStatus().getJSONObject("Tank3").getInt("SetPoint"));
+        lblSetpointTank3.setText(Integer.toString(Tank3SetPointValue)+"ºC");
         
     }//GEN-LAST:event_btnSubSetpointTank3ActionPerformed
 
     private void btnAdSetpointTank1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdSetpointTank1ActionPerformed
         // TODO add your handling code here:
         status = new StatusController();
-        newValue =  status.readStatus().getJSONObject("Tank1").getInt("SetPoint") + 1;
-        status.writeStatus("Tank1", "SetPoint", newValue);
-        System.out.println(status.readStatus().getJSONObject("Tank1").getInt("SetPoint"));
-        lblSetpointTank1.setText(Integer.toString(newValue)+"ºC");
+        Tank1SetPointValue =  Tank1SetPointValue + 1;
+        status.writeStatus("Tank1", "SetPoint", Tank1SetPointValue);
+        //System.out.println(status.readStatus().getJSONObject("Tank1").getInt("SetPoint"));
+        lblSetpointTank1.setText(Integer.toString(Tank1SetPointValue)+"ºC");
     }//GEN-LAST:event_btnAdSetpointTank1ActionPerformed
 
     private void btnAdSetpointTank3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdSetpointTank3ActionPerformed
         // TODO add your handling code here:
         status = new StatusController();
-        newValue =  status.readStatus().getJSONObject("Tank3").getInt("SetPoint") + 1;
+        Tank3SetPointValue =  Tank3SetPointValue + 1;
         status.writeStatus("Tank3", "SetPoint", newValue);
-        System.out.println(status.readStatus().getJSONObject("Tank3").getInt("SetPoint"));
-        lblSetpointTank3.setText(Integer.toString(newValue)+"ºC");
+        //System.out.println(status.readStatus().getJSONObject("Tank3").getInt("SetPoint"));
+        lblSetpointTank3.setText(Integer.toString(Tank3SetPointValue)+"ºC");
     }//GEN-LAST:event_btnAdSetpointTank3ActionPerformed
 
     private void btnSubSetpointTank1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubSetpointTank1ActionPerformed
         // TODO add your handling code here:
         status = new StatusController();
-        newValue =  status.readStatus().getJSONObject("Tank1").getInt("SetPoint") - 1;
+        Tank1SetPointValue =  Tank1SetPointValue - 1;
         status.writeStatus("Tank1", "SetPoint", newValue);
-        System.out.println(status.readStatus().getJSONObject("Tank1").getInt("SetPoint"));
-        lblSetpointTank1.setText(Integer.toString(newValue)+"ºC");
+        //System.out.println(status.readStatus().getJSONObject("Tank1").getInt("SetPoint"));
+        lblSetpointTank1.setText(Integer.toString(Tank1SetPointValue)+"ºC");
     }//GEN-LAST:event_btnSubSetpointTank1ActionPerformed
 
     private void btnMotorTank1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMotorTank1ActionPerformed
         // TODO add your handling code here:
         status = new StatusController();
-        newStatus =  !status.readStatus().getJSONObject("Tank1").getBoolean("Motor");
-        status.writeStatus("Tank1", "Motor", newStatus);
-        System.out.println(status.readStatus().getJSONObject("Tank1").getBoolean("Motor"));
+        motor1Status =  !motor1Status;
+        status.writeStatus("Tank1", "Motor", motor1Status);
+        //System.out.println(status.readStatus().getJSONObject("Tank1").getBoolean("Motor"));
         if(newStatus){
             ledMotorTank1.setIcon(ledON);
         }else{
@@ -341,9 +346,9 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
 
     private void btnMotorTank2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMotorTank2ActionPerformed
         status = new StatusController();
-        newStatus =  !status.readStatus().getJSONObject("Tank2").getBoolean("Motor");
-        status.writeStatus("Tank2", "Motor", newStatus);
-        System.out.println(status.readStatus().getJSONObject("Tank2").getBoolean("Motor"));
+        motor2Status =  !motor2Status;
+        status.writeStatus("Tank2", "Motor", motor2Status);
+        //System.out.println(status.readStatus().getJSONObject("Tank2").getBoolean("Motor"));
         if(newStatus){
             ledMotorTank2.setIcon(ledON);
         }else{
