@@ -460,14 +460,14 @@ Para esse layout, temos os seguintes componentes
     - btnAdSetpointTank1: Adiciona +1 ao Setpoint de temperatura do tanque 1
     - btnAdSetpointTank3: Adiciona +1 ao Setpoint de temperatura do tanque 3
     - btnSubSetpointTank1: Subtrai -1 ao Setpoint de temperatura do tanque 1
-    - btnSubSetpointTank3: Subtrai -1 ao Setpoint de temperatura do tanque 1
+    - btnSubSetpointTank3: Subtrai -1 ao Setpoint de temperatura do tanque 3
     - btnBomb: Muda o estado da bomba
     - btnChangeMode: Chama a classe TelaInicial
     - btnEmergency: Reseta todas as variáveis do arquivo Status.json 
     - btnMotorTank1: Muda o estado do motor do tanque 1
     - btnMotorTank2: Muda o estado do motor do tanque 2
 
-Para a brassagem manual, os botões **btnMotorTank1**, **btnMotorTank2** e **btnBomb** tem a função de mudar as variáveis contidas em Status.json de forma direta, então criamos uma variável para armazenar o estado de cada elemento a ser controlado, pegamos esse valor e o invertemos, depois passamos como parâmetro através do método **writeStatus()**. Para o usuário ter a informação do valor da variável, foi adicionado um ícone de ON/OFF em um label vazio, a imagem a ser exibida, depende do valor da variável do JSON.
+Para a brassagem manual, os botões **btnMotorTank1**, **btnMotorTank2** e **btnBomb** tem a função de mudar as variáveis contidas em Status.json de forma direta, então criamos uma variável para armazenar o estado de cada elemento a ser controlado, pegamos esse valor e o invertemos, depois passamos como parâmetro através do método **writeStatus()**. Para o usuário ter a informação do valor da variável, foi adicionado um ícone de ON/OFF em um label vazio, a imagem a ser exibida, depende do valor da variável.
 
 ```
 private void btnBombActionPerformed(java.awt.event.ActionEvent evt) {                                        
@@ -492,6 +492,20 @@ private void btnAdSetpointTank1ActionPerformed(java.awt.event.ActionEvent evt) {
 }
 ```
 
+Para podermos atualizar constantemente o valor de temperatura dos tanques, foi utilizada a mesma lógica de Interface.java, utilizando uma classe, dessa vez a TempControl,  que implementa a interface java ActionListener.
+
+```
+class TempControl implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            status = new StatusController();
+            lblTempTank1.setText(Integer.toString(status.readStatus().getJSONObject("Tank1").getInt("Temperature"))+ "ºC");
+            lblTempTank3.setText(Integer.toString(status.readStatus().getJSONObject("Tank3").getInt("Temperature"))+ "ºC");
+        }
+       
+    }
+```
+
 Para os botões **btnEmergency** e **btnChangeMode** foi utilizado as mesmas funções descritas em TelaInicial.
 
 #### TelaNovaBrassagem.java
@@ -500,7 +514,7 @@ A classe TelaNovaBrassagem é responsável por adicionar as configurações feit
 
 ![TelaNovaBrassagem](https://github.com/GabrielSirtoriCorrea/ControleDeBrassagemAutomatizado/blob/main/Planejamento/ImagensDocumentacao/TelaNovaBrassagem1.png)
 
-e os seguintes componentes:
+E os seguintes componentes:
 
 - Labels 
     
@@ -514,7 +528,7 @@ e os seguintes componentes:
     - btnNext: Adiciona o valor configurado ao Status.json, e muda o parâmetro a ser configurado
     - btnCancel: Chama a classe TelaInicial
 
-Nos botões **btnBottomArrow** e **btnTopArrow** foi adicionada para o controle da variável **targetValue**, ela é responsável por armazenar o valor que está sendo exibido em lblTarget, e o usuário a manipula através dos botões, adicionando-a ou subtraindo-a o valor 1.
+Nos botões **btnBottomArrow** e **btnTopArrow** foi adicionada uma lógica para o controle da variável **targetValue**, ela é responsável por armazenar o valor que está sendo exibido em lblTarget, e o usuário a manipula através dos botões, adicionando-a ou subtraindo-a o valor 1.
 
 ```
 private void btnBottomArrowActionPerformed(java.awt.event.ActionEvent evt) {   
@@ -626,7 +640,7 @@ private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {
 }
 ```
 
-No botão **btnCancel**, apenas chamamos a classe TelaInicial, como ja foi feito anteriormente em outros métodos.
+No botão **btnCancel**, apenas chamamos a classe Interface.java, como ja foi feito anteriormente em outros métodos.
 
 
 ### Scripts
@@ -669,7 +683,7 @@ def resetStatus():
 
 #### GPIOController.py
 
-Para controlarmos a GPIO do Raspberry Pi, precisamos importar para esse arquivo, a classe GPIO, contida na biblioteca Rpi para controlarmos a GPIO, e a classe Buzzer da biblioteca gpiozero, para controlarmos o buzzer de maneira mais simples. Após isso criamos a classe **GPIOController**, no método construtor declaramos atributos para cada saída da GPIO que queremos controlar, e setamos cada uma delas como OUTPUT.
+Para controlarmos a GPIO do Raspberry Pi, precisamos importar para esse arquivo, a classe GPIO, contida na biblioteca Rpi, e a classe Buzzer da biblioteca gpiozero, para controlarmos o buzzer de maneira mais simples. Após isso criamos a classe **GPIOController**, no método construtor declaramos atributos para cada saída da GPIO que queremos controlar, e setamos cada uma delas como OUTPUT.
 
 ```
 class GPIOController:
@@ -754,7 +768,7 @@ def getTank1Sensor(self):
 
 #### BrewController.py
 
-O Arquivo BrewController.py é o principal do sistema, é nele que está contida toda a lógica de funcionamento do projeto, e é o arquivo que deve ser executado pelo usuário. Esse arquivo executa 3 Threads de processamento, através da classe **Thread** da biblioteca **Threading**, sendo elas:
+O Arquivo BrewController.py é o principal do sistema, é nele que está contida toda a lógica de funcionamento do projeto, e é o arquivo que deve ser executado pelo usuário. Esse arquivo executa 2 Threads de processamento, através da classe **Thread** da biblioteca **Threading**, sendo elas:
 
 - startInterface: Inicia a interface do projeto
 - statusSync: Coloca os estados da saída da GPIO de acordo com os estados contidos em Status.json
@@ -764,18 +778,10 @@ Cada thread corresponde a um método do arquivo, e conseguimos executá-las da s
 
 ```
 Thread(target=statusSync).start()
-Thread(target=startInterface).start()
 Thread(target=brew).start()
 ```
 
-Com isso, os 3 métodos serão executados em paralelo, melhorando o desempenho do projeto.
-
-Para a thread **startInterface**, apenas executamos o arquivo .jar da interface através do método **system()** da biblioteca **os**, que nos permite executar comandos do Prompt.
-
-```
-def startInterface():
-    os.system('java -jar ../Interface/dist/Interface.jar')
-```
+Com isso, os 2 métodos serão executados em paralelo, melhorando o desempenho do projeto.
 
 Na thread **statusSync**, nós setamos todas as saídas da GPIO, através da classe GPIOController, de acordo com os valores contidos em Status.json, além de adicionar ao JSON a temperatura atual de cada tanque. Também foi implementado nessa Thread, a lógica para o **controle de temperatura** no **modo manual**. 
 
@@ -942,6 +948,41 @@ Com o término da fervura, avisamos o usuário novamente através de **NextProcc
                 sleep(0.5)
                 StatusController.writeStatus('Tank3', 'NextProcess', False)
                 sleep(15)
+```
+
+## Execução
+
+Para podemos rodar o projeto ao dar boot no Raspberry Pi, devemos fazer algumas configurações. Precisamos primeiro, criar uma pasta **autostart** no diretório **.config**, e criarmos um arquivo **.desktop** dentro dessa pasta.
+
+```
+mkdir /home/pi/.config/autostart
+nano /home/pi/.config/autostart/BrewController.desktop
+```
+
+Ao executarmos o comando **nano**, o Raspberry Pi irá abrir um editor de texto, e nele deve ser escrito o seguinte comando:
+
+```
+[Desktop Entry]
+Type=Application
+Name=Clock
+Exec=sudo python3 /home/pi/BrewController.py
+```
+
+Note que em Exec, devemos utilizar o comando **sudo python3** juntamente com o diretório do arquivo **BrewController.py**.
+
+Além de configurarmos o BrewController, precisamos também, iniciar a **Interface.java**, que deve ser executada junto com BrewController.py, e podemos configurá-la da mesma forma:
+
+```
+nano /home/pi/.config/autostart/BrewController.desktop
+```
+
+Dentro do arquivo:
+
+```
+[Desktop Entry]
+Type=Application
+Name=Clock
+Exec=sudo java -jar /home/pi/Interface.jar
 ```
 
 ## Considerações finais

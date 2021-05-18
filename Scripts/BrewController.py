@@ -8,9 +8,6 @@ from GPIOController import GPIOController
 temperatureSensors = TemperatureSensors()
 gpioController = GPIOController()
 
-def startInterface():
-    os.system('java -jar ../Interface/dist/Interface.jar')
-
 def statusSync():
     tempTank1, tempTank3, lastTempTank1, lastTempTank3 = (0,0,0,0)
     while True:
@@ -159,6 +156,5 @@ def brew():
 
 StatusController.resetStatus()
 Thread(target=statusSync).start()
-Thread(target=startInterface).start()
 Thread(target=brew).start()
 
