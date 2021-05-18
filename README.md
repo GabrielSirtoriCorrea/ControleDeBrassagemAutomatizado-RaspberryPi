@@ -467,29 +467,28 @@ Para esse layout, temos os seguintes componentes
     - btnMotorTank1: Muda o estado do motor do tanque 1
     - btnMotorTank2: Muda o estado do motor do tanque 2
 
-Para a brassagem manual, os botões **btnMotorTank1**, **btnMotorTank2** e **btnBomb** tem a função de mudar as variáveis contidas em Status.json de forma direta, então podemos apenas pegar o valor atual da variável com o método **readStatus()** de StatusController, inverter o seu valor, e escreve-lo em Status.json, através do método **writeStatus()**. Para o usuário ter a informação do valor da variável, foi adicionado um ícone de ON/OFF em um label vazio, a imagem a ser exibida, depende do valor da variável do JSON.
+Para a brassagem manual, os botões **btnMotorTank1**, **btnMotorTank2** e **btnBomb** tem a função de mudar as variáveis contidas em Status.json de forma direta, então criamos uma variável para armazenar o estado de cada elemento a ser controlado, pegamos esse valor e o invertemos, depois passamos como parâmetro através do método **writeStatus()**. Para o usuário ter a informação do valor da variável, foi adicionado um ícone de ON/OFF em um label vazio, a imagem a ser exibida, depende do valor da variável do JSON.
 
 ```
-private void btnBombActionPerformed(java.awt.event.ActionEvent evt) {
-    status = new StatusController();
-    newStatus =  !status.readStatus().getBoolean("Bomb");
-    status.writeStatus(null, "Bomb", newStatus);
-    if(newStatus){
-        ledBomb.setIcon(ledON);
-    }else{
-        ledBomb.setIcon(ledOFF);
-    }
+private void btnBombActionPerformed(java.awt.event.ActionEvent evt) {                                        
+        status = new StatusController();
+        bombStatus =  !bombStatus;
+        status.writeStatus(null, "Bomb", bombStatus);
+        if(bombStatus){
+            ledBomb.setIcon(ledON);
+        }else{
+            ledBomb.setIcon(ledOFF);
+        }
 ```
 
 Os botões **btnSubSetPointTank1**, **btnSubSetPointTank3**, **btnAdSetPointTank1** e **btnAdSetPointTank3**, foram implementados com uma lógica semelhante a dos botões citados anteriormente, sua única diferença é a de adicionar +1 ou subtrair -1 ao valor lido, e mostrá-lo no label correspondente.
 
 ```
-private void btnAdSetpointTank1ActionPerformed(java.awt.event.ActionEvent evt) { 
-    status = new StatusController();
-    newValue =  status.readStatus().getJSONObject("Tank1").getInt("SetPoint") + 1;
-    status.writeStatus("Tank1", "SetPoint", newValue);
-    System.out.println(status.readStatus().getJSONObject("Tank1").getInt("SetPoint"));
-    lblSetpointTank1.setText(Integer.toString(newValue)+"ºC");
+private void btnAdSetpointTank1ActionPerformed(java.awt.event.ActionEvent evt) {     
+        status = new StatusController();
+        Tank1SetPointValue =  Tank1SetPointValue + 1;
+        status.writeStatus("Tank1", "SetPoint", Tank1SetPointValue);
+        lblSetpointTank1.setText(Integer.toString(Tank1SetPointValue)+"ºC");
 }
 ```
 
@@ -778,7 +777,7 @@ def startInterface():
     os.system('java -jar ../Interface/dist/Interface.jar')
 ```
 
-Na thread **statusSync**, nós setamos todas as saídas da GPIO, através da classe GPIOController, de acordo com os valores contidos em Status.json, além de adicionar ao JSON a temperatura atual de cada tanque.
+Na thread **statusSync**, nós setamos todas as saídas da GPIO, através da classe GPIOController, de acordo com os valores contidos em Status.json, além de adicionar ao JSON a temperatura atual de cada tanque. Também foi implementado nessa Thread, a lógica para o **controle de temperatura** no **modo manual**. 
 
 ```
 def statusSync():
@@ -801,6 +800,21 @@ def statusSync():
             gpioController.setMotor2(StatusController.readStatus()['Tank2']['Motor'])
             gpioController.setResistence1(StatusController.readStatus()['Tank1']['Resistence'])
             gpioController.setResistence2(StatusController.readStatus()['Tank3']['Resistence'])
+
+            status = StatusController.readStatus()  
+
+            if status['BrewMode'] == 'Manual': 
+                if status['Tank1']['Temperature'] < status['Tank1']['SetPoint']:
+                    StatusController.writeStatus('Tank1', 'Resistence', True)
+                else:
+                    StatusController.writeStatus('Tank1', 'Resistence', False)
+
+            if status['BrewMode'] == 'Manual':
+                if status['Tank3']['Temperature'] < status['Tank3']['SetPoint']:
+                    StatusController.writeStatus('Tank3', 'Resistence', True)
+                else:
+                    StatusController.writeStatus('Tank3', 'Resistence', False)
+            
             print(tempTank1)
             print(tempTank3)
         except:
