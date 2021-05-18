@@ -266,9 +266,9 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
     private void btnBombActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBombActionPerformed
         // TODO add your handling code here:
         status = new StatusController();
-        newStatus =  !bombStatus;
-        status.writeStatus(null, "Bomb", newStatus);
-        if(newStatus){
+        bombStatus =  !bombStatus;
+        status.writeStatus(null, "Bomb", bombStatus);
+        if(bombStatus){
             ledBomb.setIcon(ledON);
         }else{
             ledBomb.setIcon(ledOFF);
@@ -317,7 +317,7 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
         // TODO add your handling code here:
         status = new StatusController();
         Tank3SetPointValue =  Tank3SetPointValue + 1;
-        status.writeStatus("Tank3", "SetPoint", newValue);
+        status.writeStatus("Tank3", "SetPoint", Tank3SetPointValue);
         //System.out.println(status.readStatus().getJSONObject("Tank3").getInt("SetPoint"));
         lblSetpointTank3.setText(Integer.toString(Tank3SetPointValue)+"ºC");
     }//GEN-LAST:event_btnAdSetpointTank3ActionPerformed
@@ -326,7 +326,7 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
         // TODO add your handling code here:
         status = new StatusController();
         Tank1SetPointValue =  Tank1SetPointValue - 1;
-        status.writeStatus("Tank1", "SetPoint", newValue);
+        status.writeStatus("Tank1", "SetPoint", Tank1SetPointValue);
         //System.out.println(status.readStatus().getJSONObject("Tank1").getInt("SetPoint"));
         lblSetpointTank1.setText(Integer.toString(Tank1SetPointValue)+"ºC");
     }//GEN-LAST:event_btnSubSetpointTank1ActionPerformed
@@ -337,7 +337,7 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
         motor1Status =  !motor1Status;
         status.writeStatus("Tank1", "Motor", motor1Status);
         //System.out.println(status.readStatus().getJSONObject("Tank1").getBoolean("Motor"));
-        if(newStatus){
+        if(motor1Status){
             ledMotorTank1.setIcon(ledON);
         }else{
             ledMotorTank1.setIcon(ledOFF);
@@ -349,7 +349,7 @@ public class TelaBrassagemManual extends javax.swing.JFrame {
         motor2Status =  !motor2Status;
         status.writeStatus("Tank2", "Motor", motor2Status);
         //System.out.println(status.readStatus().getJSONObject("Tank2").getBoolean("Motor"));
-        if(newStatus){
+        if(motor2Status){
             ledMotorTank2.setIcon(ledON);
         }else{
             ledMotorTank2.setIcon(ledOFF);
