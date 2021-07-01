@@ -987,7 +987,12 @@ Exec=sudo java -jar /home/pi/Interface.jar
 
 ## Considerações finais
 
-Trabalhei nesse projeto por 5 meses, não diretos, e sua realização foi muito divertida, e pude adquirir muitos conhecimetos com a realização dele, que ainda apesar de rodar, apresenta logs de erros da Interface, eles não interferem no processo, mas podem causar algum bug. Por ser um projeto um pouco complexo, podem ter havido implementações que simplesmente não foram feitas, peço pra que se encontrar alguma delas, crie uma issue nesse repositório, ou até mesmo fazer a implementação e criar um pull request.
+Apesar de ser um projeto muito interessante, ele ainda contém alguns defeitos, como por exemplo os logs de erros que aparecem na execução manual dos scripts, eles não interferem no processo, mas podem causar algum bug. Além disso, temos também o alto tempo de resposta ao pressionar algum botão da Interface, o que pode ser decorrente da baixa potência de processamento e de memória do Raspberry Pi 3 ou também da lógica do projeto. Em contra partida, temos alguns pontos positivos, como a simplicidade da interface, o que ajuda o usuário ao manusear o sistema.
+
+Abaixo temos um link para o vídeo do funcionamento do projeto:
+https://youtu.be/SRfJgCcL8y8
+
+Trabalhei nesse projeto por 5 meses, não diretos, e sua realização foi muito divertida, e pude adquirir muitos conhecimetos com a realização dele. Por ser um projeto um pouco complexo, podem ter havido implementações que simplesmente não foram feitas, peço pra que se encontrar alguma delas, crie uma issue nesse repositório, ou até mesmo fazer a implementação e criar um pull request.
 
 ## Me faça uma doação!
 
